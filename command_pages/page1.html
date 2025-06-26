@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Interactive platform to learn Linux commands through real-time simulators and easy tutorials." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linux Command Learning Platform</title>
+
+  <link rel="stylesheet" href="../styles/responsive.css">
+  <link rel="preload" href="styles/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="styles/main.css"></noscript>
+<style>
+  .features {
+  background-color: #f5f7fa;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 2rem auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.features h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #222;
+  text-align: center;
+}
+
+.features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.features li {
+  background: #fff;
+  padding: 1.5rem 1.8rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #444;
+}
+
+.features li strong {
+  color: #0078d7;
+}
+
+.features li:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 30px rgba(0, 120, 215, 0.2);
+}
+
+/* Call to action styling */
+.call-to-action {
+  text-align: center;
+  padding: 3rem 1rem 5rem;
+  background: linear-gradient(135deg, #0078d7, #00aaff);
+  color: #fff;
+  border-radius: 12px;
+  max-width: 700px;
+  margin: 3rem auto 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 10px 30px rgba(0, 120, 215, 0.3);
+}
+
+.call-to-action h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.call-to-action p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.call-to-action .button.large {
+  background-color: #fff;
+  color: #0078d7;
+  padding: 0.9rem 2.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 30px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.6);
+}
+
+.call-to-action .button.large:hover {
+  background-color: #005ea3;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 94, 163, 0.8);
+  cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="commandlist.html">Command List</a>
+      <a href="contact.html">Contact</a>
+      <button id="darkModeToggle" class="button toggle-theme">Dark Mode</button>
+    </nav>
+  </header>
+  
+ <section class="hero">
+    <h1>Learn Linux Commands with Interactive Simulators!</h1>
+    <p>
+      Get hands-on experience with the most common Linux commands. Whether you're a beginner or looking to sharpen your skills, our platform offers easy-to-follow tutorials and real-time simulators to boost your learning journey.
+    </p>
+    <a href="commandlist.html" class="button">Start Learning</a>
+  </section>
+
+  <section class="features">
+    <h2>Why Choose Our Platform?</h2>
+    <ul>
+      <li><strong>Interactive Simulators:</strong> Practice Linux commands in a safe, simulated environment right in your browser.</li>
+      <li><strong>Step-by-Step Tutorials:</strong> Clear and concise lessons designed to help you master commands quickly.</li>
+      <li><strong>Real-World Use Cases:</strong> Learn commands with practical examples used by system administrators worldwide.</li>
+      <li><strong>Progress Tracking:</strong> Monitor your learning journey and revisit difficult topics anytime.</li>
+      <li><strong>Community Support:</strong> Join a community of learners and experts to share knowledge and solve problems together.</li>
+    </ul>
+  </section>
+
+  <section class="call-to-action">
+    <h2>Ready to Master Linux?</h2>
+    <p>
+      Start your Linux command journey now with interactive practice and expert guidance.
+    </p>
+    <a href="Simulator.html" class="button large">Explore Commands</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Linux Command Learning Platform</p>
+  </footer>
+
+  <script src="scripts/main.js"></script>
+  <script src="../scripts/dark-mode.js"></script>
+</body>
+</html>
