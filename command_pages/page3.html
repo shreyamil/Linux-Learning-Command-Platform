@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux Commands Learning Platform - cd Command</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #f0c93d;
+    }
+    h3 {
+      color: #35c7f3;
+    }
+    a {
+      color: #35c7f3;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    nav a {
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    header {
+      margin-bottom: 20px;
+      border-bottom: 2px solid #35c7f3;
+      padding-bottom: 10px;
+    }
+    section.overview {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    section.command-box {
+      background: #222;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    code {
+      background: #333;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #f0c93d;
+    }
+    input[type="text"] {
+      background: #111;
+      border: 1px solid #555;
+      border-radius: 4px;
+      padding: 8px;
+      width: 300px;
+      color: #eee;
+      font-family: monospace;
+      margin-right: 10px;
+    }
+    button {
+      background: #35c7f3;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: #121212;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #27a1d9;
+    }
+    .output {
+      background: #111;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      min-height: 60px;
+      color: #c5c5c5;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #333;
+      color: #f0c93d;
+    }
+    tr:nth-child(even) {
+      background-color: #222;
+    }
+    tr:hover {
+      background-color: #333;
+    }
+    .directory-display {
+      background: #333;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px 0;
+      font-family: monospace;
+    }
+    .directory-path {
+      color: #35c7f3;
+      font-weight: bold;
+    }
+    .directory-change {
+      color: #4CAF50;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .directory-structure {
+      margin-left: 20px;
+      color: #ccc;
+    }
+    .directory-folder {
+      color: #35c7f3;
+    }
+    .directory-file {
+      color: #f0c93d;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="../">Home</a>
+    <a href="../commandlist.html">Command List</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+  <h1>Working With Directories: <code>cd</code></h1>
+</header>
+
+<section class="overview">
+  <h2>Directory Navigation Commands</h2>
+  <p>The <code>cd</code> (change directory) command is used to navigate between directories:</p>
+  <table>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td><code>cd</code> or <code>cd ~</code></td>
+      <td>Changes to the home directory</td>
+    </tr>
+    <tr>
+      <td><code>cd /</code></td>
+      <td>Changes to the root directory</td>
+    </tr>
+    <tr>
+      <td><code>cd ..</code></td>
+      <td>Moves to the parent directory</td>
+    </tr>
+    <tr>
+      <td><code>cd 'xx yy'</code></td>
+      <td>Changes to a directory with spaces in its name</td>
+    </tr>
+  </table>
+</section>
+
+<section class="command-box" id="cd-home">
+  <h2><code>cd</code> or <code>cd ~</code> - Home Directory</h2>
+  <ol>
+    <li><strong>What it does:</strong> Changes to your home directory</li>
+    <li><strong>When to use:</strong> When you want to quickly return to your home folder</li>
+    <li><strong>Example:</strong> 
+      <pre><code>cd
+# or
+cd ~
+pwd
+/home/username</code></pre>
+    </li>
+  </ol>
+  <div class="directory-display">
+    Current directory: <span class="directory-path" id="currentDir1">/home/username/projects/website</span>
+    <div class="directory-structure">
+      <div class="directory-folder">📁 projects</div>
+      <div class="directory-structure">
+        <div class="directory-folder">📁 website</div>
+        <div class="directory-structure">
+          <div class="directory-file">📄 index.html</div>
+          <div class="directory-file">📄 style.css</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button onclick="runCdHome()">Run command: cd</button>
+  <button onclick="runCdTilde()">Run command: cd ~</button>
+  <div class="output" id="cdHomeOutput"></div>
+</section>
+
+<section class="command-box" id="cd-root">
+  <h2><code>cd /</code> - Root Directory</h2>
+  <ol>
+    <li><strong>What it does:</strong> Changes to the root directory (top of filesystem)</li>
+    <li><strong>When to use:</strong> When you need to access system-wide files</li>
+    <li><strong>Example:</strong> 
+      <pre><code>cd /
+pwd
+/</code></pre>
+    </li>
+  </ol>
+  <div class="directory-display">
+    Current directory: <span class="directory-path" id="currentDir2">/home/username</span>
+    <div class="directory-structure">
+      <div class="directory-folder">📁 home</div>
+      <div class="directory-structure">
+        <div class="directory-folder">📁 username</div>
+        <div class="directory-structure">
+          <div class="directory-folder">📁 Documents</div>
+          <div class="directory-folder">📁 Downloads</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button onclick="runCdRoot()">Run command: cd /</button>
+  <div class="output" id="cdRootOutput"></div>
+</section>
+
+<section class="command-box" id="cd-parent">
+  <h2><code>cd ..</code> - Parent Directory</h2>
+  <ol>
+    <li><strong>What it does:</strong> Moves up one directory level</li>
+    <li><strong>When to use:</strong> When you want to go back to the containing folder</li>
+    <li><strong>Example:</strong> 
+      <pre><code>pwd
+/home/username/projects/website
+cd ..
+pwd
+/home/username/projects</code></pre>
+    </li>
+  </ol>
+  <div class="directory-display">
+    Current directory: <span class="directory-path" id="currentDir3">/home/username/projects/website</span>
+    <div class="directory-structure">
+      <div class="directory-folder">📁 projects</div>
+      <div class="directory-structure">
+        <div class="directory-folder">📁 website</div>
+        <div class="directory-structure">
+          <div class="directory-file">📄 index.html</div>
+          <div class="directory-file">📄 style.css</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button onclick="runCdParent()">Run command: cd ..</button>
+  <div class="output" id="cdParentOutput"></div>
+</section>
+
+<section class="command-box" id="cd-space">
+  <h2><code>cd 'xx yy'</code> - Directory with Spaces</h2>
+  <ol>
+    <li><strong>What it does:</strong> Changes to a directory with spaces in its name</li>
+    <li><strong>When to use:</strong> When working with folders containing spaces</li>
+    <li><strong>Example:</strong> 
+      <pre><code>cd 'my documents'
+pwd
+/home/username/my documents</code></pre>
+    </li>
+  </ol>
+  <div class="directory-display">
+    Current directory: <span class="directory-path" id="currentDir4">/home/username</span>
+    <div class="directory-structure">
+      <div class="directory-folder">📁 Documents</div>
+      <div class="directory-folder">📁 'my documents'</div>
+      <div class="directory-structure">
+        <div class="directory-file">📄 report.docx</div>
+        <div class="directory-file">📄 notes.txt</div>
+      </div>
+      <div class="directory-folder">📁 Downloads</div>
+    </div>
+  </div>
+  <input type="text" id="cdSpaceInput" placeholder="Enter directory name with spaces (e.g. 'my documents')" />
+  <button onclick="runCdSpace()">Run command: cd 'directory'</button>
+  <div class="output" id="cdSpaceOutput"></div>
+</section>
+
+<script>
+  // Track current directory and structure
+  const directoryStructure = {
+    '/': {
+      type: 'folder',
+      children: {
+        'home': {
+          type: 'folder',
+          children: {
+            'username': {
+              type: 'folder',
+              children: {
+                'projects': {
+                  type: 'folder',
+                  children: {
+                    'website': {
+                      type: 'folder',
+                      children: {
+                        'index.html': { type: 'file' },
+                        'style.css': { type: 'file' }
+                      }
+                    }
+                  }
+                },
+                'Documents': { type: 'folder', children: {} },
+                'Downloads': { type: 'folder', children: {} },
+                'my documents': {
+                  type: 'folder',
+                  children: {
+                    'report.docx': { type: 'file' },
+                    'notes.txt': { type: 'file' }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+
+  let currentDir = "/home/username/projects/website";
+  
+  // Update directory displays
+  function updateDirectoryDisplays() {
+    // Update all current directory path displays
+    document.querySelectorAll('.directory-path').forEach(el => {
+      el.textContent = currentDir;
+    });
+    
+    // Update the visual directory structure for each section
+    updateDirectoryStructure('currentDir1', currentDir);
+    updateDirectoryStructure('currentDir2', currentDir);
+    updateDirectoryStructure('currentDir3', currentDir);
+    updateDirectoryStructure('currentDir4', currentDir);
+  }
+  
+  // Update the visual directory structure display
+  function updateDirectoryStructure(elementId, path) {
+    const container = document.getElementById(elementId).parentElement.querySelector('.directory-structure');
+    const parts = path.split('/').filter(p => p !== '');
+    let current = directoryStructure['/'];
+    
+    // Navigate to current directory in the structure
+    for (const part of parts) {
+      if (current.children && current.children[part]) {
+        current = current.children[part];
+      } else {
+        current = { type: 'folder', children: {} };
+        break;
+      }
+    }
+    
+    // Generate HTML for the structure
+    container.innerHTML = generateStructureHTML(currentDir.split('/'), directoryStructure['/'], 0);
+  }
+  
+  // Recursive function to generate directory structure HTML
+  function generateStructureHTML(pathParts, node, depth, currentPath = '') {
+    let html = '';
+    const currentPart = pathParts[depth];
+    
+    if (node.type === 'folder' && node.children) {
+      for (const [name, child] of Object.entries(node.children)) {
+        const childPath = currentPath ? `${currentPath}/${name}` : `/${name}`;
+        const isActive = pathParts[depth + 1] === name;
+        
+        if (depth === 0 || (depth > 0 && pathParts[depth - 1] === currentPath.split('/').pop())) {
+          const icon = child.type === 'folder' ? '📁' : '📄';
+          const className = child.type === 'folder' ? 'directory-folder' : 'directory-file';
+          
+          html += `<div class="${className}">${icon} ${name}</div>`;
+          
+          if (isActive && child.type === 'folder') {
+            html += `<div class="directory-structure">` + 
+                    generateStructureHTML(pathParts, child, depth + 1, childPath) + 
+                    `</div>`;
+          }
+        }
+      }
+    }
+    
+    return html;
+  }
+  
+  // Initialize displays
+  updateDirectoryDisplays();
+  
+  // cd home directory
+  function runCdHome() {
+    const oldDir = currentDir;
+    currentDir = "/home/username";
+    updateDirectoryDisplays();
+    document.getElementById("cdHomeOutput").textContent = 
+      `$ cd\nPrevious directory: ${oldDir}\nCurrent directory: ${currentDir}`;
+  }
+  
+  // cd ~ (home directory)
+  function runCdTilde() {
+    const oldDir = currentDir;
+    currentDir = "/home/username";
+    updateDirectoryDisplays();
+    document.getElementById("cdHomeOutput").textContent = 
+      `$ cd ~\nPrevious directory: ${oldDir}\nCurrent directory: ${currentDir}`;
+  }
+  
+  // cd / (root directory)
+  function runCdRoot() {
+    const oldDir = currentDir;
+    currentDir = "/";
+    updateDirectoryDisplays();
+    document.getElementById("cdRootOutput").textContent = 
+      `$ cd /\nPrevious directory: ${oldDir}\nCurrent directory: ${currentDir}`;
+  }
+  
+  // cd .. (parent directory)
+  function runCdParent() {
+    const oldDir = currentDir;
+    if (currentDir !== "/") {
+      const parts = currentDir.split('/').filter(p => p !== '');
+      if (parts.length > 1) {
+        parts.pop();
+        currentDir = '/' + parts.join('/');
+      } else {
+        currentDir = "/";
+      }
+    }
+    updateDirectoryDisplays();
+    document.getElementById("cdParentOutput").textContent = 
+      `$ cd ..\nPrevious directory: ${oldDir}\nCurrent directory: ${currentDir}`;
+  }
+  
+  // cd with spaces in directory name
+  function runCdSpace() {
+    const dirName = document.getElementById("cdSpaceInput").value.trim();
+    const output = document.getElementById("cdSpaceOutput");
+    
+    if (dirName) {
+      if (dirName.includes(" ")) {
+        const oldDir = currentDir;
+        currentDir = `/home/username/${dirName}`;
+        updateDirectoryDisplays();
+        output.textContent = `$ cd '${dirName}'\nPrevious directory: ${oldDir}\nCurrent directory: ${currentDir}`;
+      } else {
+        output.textContent = "Error: Directory name must contain spaces. Try names like 'my documents' or 'project files'";
+      }
+    } else {
+      output.textContent = "Please enter a directory name containing spaces.";
+    }
+  }
+</script>
+
+</body>
+</html>
