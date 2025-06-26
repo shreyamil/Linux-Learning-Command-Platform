@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux Commands Learning Platform - mv Command</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #f0c93d;
+    }
+    h3 {
+      color: #35c7f3;
+    }
+    a {
+      color: #35c7f3;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    nav a {
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    header {
+      margin-bottom: 20px;
+      border-bottom: 2px solid #35c7f3;
+      padding-bottom: 10px;
+    }
+    section.overview {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    section.command-box {
+      background: #222;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .command-section {
+      flex: 1;
+      min-width: 300px;
+    }
+    .file-section {
+      flex: 1;
+      min-width: 300px;
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 6px;
+    }
+    code {
+      background: #333;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #f0c93d;
+    }
+    select {
+      background: #111;
+      border: 1px solid #555;
+      border-radius: 4px;
+      padding: 8px;
+      color: #eee;
+      font-family: monospace;
+      margin-right: 10px;
+      width: 200px;
+    }
+    button {
+      background: #35c7f3;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: #121212;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #27a1d9;
+    }
+    .output {
+      background: #111;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      min-height: 60px;
+      color: #c5c5c5;
+    }
+    .file-content {
+      background: #111;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      max-height: 300px;
+      overflow-y: auto;
+      color: #c5c5c5;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #333;
+      color: #f0c93d;
+    }
+    tr:nth-child(even) {
+      background-color: #222;
+    }
+    tr:hover {
+      background-color: #333;
+    }
+    .file-title {
+      color: #35c7f3;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .file-system {
+      margin-top: 10px;
+    }
+    .file-item {
+      margin-left: 20px;
+    }
+    .directory {
+      color: #35c7f3;
+    }
+    .file {
+      color: #f0c93d;
+    }
+    .hidden {
+      color: #888;
+    }
+    .message {
+      color: #4CAF50;
+      font-style: italic;
+    }
+    .warning {
+      color: #ff9800;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="../">Home</a>
+    <a href="../commandlist.html">Command List</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+  <h1>Working With Files: <code>mv</code></h1>
+</header>
+
+<section class="overview">
+  <h2>File Move/Rename Commands</h2>
+  <p>The <code>mv</code> command moves or renames files and directories:</p>
+  <table>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td><code>mv source dest</code></td>
+      <td>Basic file move or rename</td>
+    </tr>
+    <tr>
+      <td><code>mv -i source dest</code></td>
+      <td>Interactive mode (prompts before overwrite)</td>
+    </tr>
+    <tr>
+      <td><code>mv -u source dest</code></td>
+      <td>Update (only if source is newer)</td>
+    </tr>
+    <tr>
+      <td><code>mv -v source dest</code></td>
+      <td>Verbose mode</td>
+    </tr>
+    <tr>
+      <td><code>mv -n source dest</code></td>
+      <td>No overwrite</td>
+    </tr>
+  </table>
+</section>
+
+<section class="command-box" id="mv-basic">
+  <div class="command-section">
+    <h2><code>mv source dest</code> - Basic Move/Rename</h2>
+    <ol>
+      <li><strong>What it does:</strong> Moves or renames files/directories</li>
+      <li><strong>When to use:</strong> For simple file movement or renaming</li>
+      <li><strong>Example:</strong> 
+        <pre><code>mv document.txt backup/
+# Moves document.txt to backup folder
+mv oldname.txt newname.txt
+# Renames the file</code></pre>
+      </li>
+    </ol>
+    <select id="mvSourceFile">
+      <option value="document.txt">document.txt</option>
+      <option value="config.cfg">config.cfg</option>
+      <option value="notes.md">notes.md</option>
+    </select>
+    <select id="mvDestFolder">
+      <option value="backup/">backup/</option>
+      <option value="archive/">archive/</option>
+      <option value="newname.txt">newname.txt (rename)</option>
+    </select>
+    <button onclick="runMvBasic()">Run command</button>
+    <div class="output" id="mvBasicOutput">Output will appear here</div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">File System:</div>
+    <div class="file-system" id="fileSystemBasic">
+      <div class="directory">/home/user/</div>
+      <div class="file-item"><span class="file">document.txt</span> (2023-01-10 09:15)</div>
+      <div class="file-item"><span class="file">config.cfg</span> (2023-01-09 14:30)</div>
+      <div class="file-item"><span class="file">notes.md</span> (2023-01-11 10:45)</div>
+      <div class="directory">backup/</div>
+      <div class="directory">archive/</div>
+    </div>
+  </div>
+</section>
+
+<section class="command-box" id="mv-interactive">
+  <div class="command-section">
+    <h2><code>mv -i source dest</code> - Interactive</h2>
+    <ol>
+      <li><strong>What it does:</strong> Prompts before overwriting</li>
+      <li><strong>When to use:</strong> When you want to prevent accidental overwrites</li>
+      <li><strong>Example:</strong> 
+        <pre><code>mv -i notes.txt backup/
+mv: overwrite 'backup/notes.txt'? (y/n)</code></pre>
+      </li>
+    </ol>
+    <select id="mvISourceFile">
+      <option value="notes.txt">notes.txt</option>
+      <option value="report.pdf">report.pdf</option>
+    </select>
+    <select id="mvIDestFolder">
+      <option value="backup/">backup/</option>
+      <option value="shared/">shared/</option>
+      <option value="newnotes.txt">newnotes.txt (rename)</option>
+    </select>
+    <button onclick="runMvInteractive()">Run command</button>
+    <div class="output" id="mvInteractiveOutput">Output will appear here</div>
+    <div id="mvInteractivePrompt" style="display: none; margin-top: 10px;">
+      <span class="warning">Overwrite destination file? (y/n)</span>
+      <input type="text" id="mvInteractiveAnswer" style="width: 50px; margin: 0 10px;">
+      <button onclick="handleMvInteractiveAnswer()">Submit</button>
+    </div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">File System:</div>
+    <div class="file-system" id="fileSystemInteractive">
+      <div class="directory">/home/user/</div>
+      <div class="file-item"><span class="file">notes.txt</span> (2023-01-12 11:20)</div>
+      <div class="file-item"><span class="file">report.pdf</span> (2023-01-11 15:10)</div>
+      <div class="directory">backup/</div>
+      <div class="file-item"><span class="file">notes.txt</span> (2023-01-10 09:15)</div>
+      <div class="directory">shared/</div>
+    </div>
+  </div>
+</section>
+
+<section class="command-box" id="mv-options">
+  <div class="command-section">
+    <h2>Other Common Options</h2>
+    
+    <h3><code>mv -n source dest</code> - No Overwrite</h3>
+    <p>Prevents overwriting existing files</p>
+    <select id="mvNSourceFile">
+      <option value="config.txt">config.txt</option>
+      <option value="settings.ini">settings.ini</option>
+    </select>
+    <select id="mvNDestFolder">
+      <option value="backup/">backup/</option>
+      <option value="configs/">configs/</option>
+      <option value="newconfig.txt">newconfig.txt (rename)</option>
+    </select>
+    <button onclick="runMvNoOverwrite()">Run command</button>
+    <div class="output" id="mvNOutput"></div>
+    
+    <h3><code>mv -u source dest</code> - Update</h3>
+    <p>Only moves if source is newer</p>
+    <select id="mvUSourceFile">
+      <option value="data.json">data.json (2023-01-15)</option>
+      <option value="log.txt">log.txt (2023-01-14)</option>
+    </select>
+    <select id="mvUDestFolder">
+      <option value="backup/">backup/ (contains older data.json)</option>
+      <option value="logs/">logs/</option>
+      <option value="newdata.json">newdata.json (rename)</option>
+    </select>
+    <button onclick="runMvUpdate()">Run command</button>
+    <div class="output" id="mvUOutput"></div>
+    
+    <h3><code>mv -v source dest</code> - Verbose</h3>
+    <p>Shows detailed move process</p>
+    <select id="mvVSourceFile">
+      <option value="report.doc">report.doc</option>
+      <option value="presentation.ppt">presentation.ppt</option>
+    </select>
+    <select id="mvVDestFolder">
+      <option value="backup/">backup/</option>
+      <option value="presentations/">presentations/</option>
+      <option value="newreport.doc">newreport.doc (rename)</option>
+    </select>
+    <button onclick="runMvVerbose()">Run command</button>
+    <div class="output" id="mvVOutput"></div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">File System Details:</div>
+    <div class="file-system">
+      <div class="directory">/home/user/</div>
+      <div class="file-item"><span class="file">config.txt</span> (2023-01-13)</div>
+      <div class="file-item"><span class="file">settings.ini</span> (2023-01-12)</div>
+      <div class="file-item"><span class="file">data.json</span> (2023-01-15)</div>
+      <div class="file-item"><span class="file">log.txt</span> (2023-01-14)</div>
+      <div class="file-item"><span class="file">report.doc</span></div>
+      <div class="file-item"><span class="file">presentation.ppt</span></div>
+      
+      <div class="directory">backup/</div>
+      <div class="file-item"><span class="file">config.txt</span> (2023-01-10)</div>
+      <div class="file-item"><span class="file">data.json</span> (2023-01-10)</div>
+      
+      <div class="directory">configs/</div>
+      <div class="directory">logs/</div>
+      <div class="directory">presentations/</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Track file system state
+  let fileSystem = {
+    '/home/user/': {
+      'document.txt': { type: 'file', modified: '2023-01-10 09:15' },
+      'config.cfg': { type: 'file', modified: '2023-01-09 14:30' },
+      'notes.md': { type: 'file', modified: '2023-01-11 10:45' },
+      'notes.txt': { type: 'file', modified: '2023-01-12 11:20' },
+      'report.pdf': { type: 'file', modified: '2023-01-11 15:10' },
+      'config.txt': { type: 'file', modified: '2023-01-13' },
+      'settings.ini': { type: 'file', modified: '2023-01-12' },
+      'data.json': { type: 'file', modified: '2023-01-15' },
+      'log.txt': { type: 'file', modified: '2023-01-14' },
+      'report.doc': { type: 'file' },
+      'presentation.ppt': { type: 'file' },
+      'backup/': {
+        type: 'dir',
+        'notes.txt': { type: 'file', modified: '2023-01-10 09:15' },
+        'config.txt': { type: 'file', modified: '2023-01-10' },
+        'data.json': { type: 'file', modified: '2023-01-10' }
+      },
+      'archive/': { type: 'dir' },
+      'shared/': { type: 'dir' },
+      'configs/': { type: 'dir' },
+      'logs/': { type: 'dir' },
+      'presentations/': { type: 'dir' }
+    }
+  };
+
+  // Basic mv command
+  function runMvBasic() {
+    const source = document.getElementById("mvSourceFile").value;
+    const dest = document.getElementById("mvDestFolder").value;
+    
+    // Check if destination is a rename (no slash)
+    const isRename = !dest.includes('/');
+    
+    const output = `$ mv ${source} ${dest}\n` +
+                   `${isRename ? `Renamed '${source}' to '${dest}'` : `Moved '${source}' to '${dest}'`}`;
+    
+    document.getElementById("mvBasicOutput").textContent = output;
+    
+    // In a real implementation, you would update the file system state here
+  }
+
+  // Interactive mv command
+  function runMvInteractive() {
+    const source = document.getElementById("mvISourceFile").value;
+    const dest = document.getElementById("mvIDestFolder").value;
+    const isRename = !dest.includes('/');
+    const destFile = isRename ? dest : dest + source;
+    
+    // Check if destination exists
+    const destExists = checkFileExists(destFile);
+    
+    if (destExists) {
+      document.getElementById("mvInteractiveOutput").textContent = 
+        `$ mv -i ${source} ${dest}\n` +
+        `mv: overwrite '${destFile}'?`;
+      document.getElementById("mvInteractivePrompt").style.display = "block";
+      window.currentMoveOperation = { source, dest, isRename };
+    } else {
+      document.getElementById("mvInteractiveOutput").textContent = 
+        `$ mv -i ${source} ${dest}\n` +
+        `${isRename ? `Renamed '${source}' to '${dest}'` : `Moved '${source}' to '${destFile}'`}`;
+      document.getElementById("mvInteractivePrompt").style.display = "none";
+    }
+  }
+
+  function handleMvInteractiveAnswer() {
+    const answer = document.getElementById("mvInteractiveAnswer").value.toLowerCase();
+    const operation = window.currentMoveOperation;
+    const destFile = operation.isRename ? operation.dest : operation.dest + operation.source;
+    
+    let output = `$ mv -i ${operation.source} ${operation.dest}\n`;
+    
+    if (answer === 'y') {
+      output += `${operation.isRename ? `Renamed '${operation.source}' to '${destFile}' (overwritten)` : `Moved '${operation.source}' to '${destFile}' (overwritten)`}`;
+    } else {
+      output += `Not overwriting '${destFile}'`;
+    }
+    
+    document.getElementById("mvInteractiveOutput").textContent = output;
+    document.getElementById("mvInteractivePrompt").style.display = "none";
+    document.getElementById("mvInteractiveAnswer").value = "";
+  }
+
+  // No overwrite mv command
+  function runMvNoOverwrite() {
+    const source = document.getElementById("mvNSourceFile").value;
+    const dest = document.getElementById("mvNDestFolder").value;
+    const isRename = !dest.includes('/');
+    const destFile = isRename ? dest : dest + source;
+    
+    const destExists = checkFileExists(destFile);
+    
+    let output = `$ mv -n ${source} ${dest}\n`;
+    
+    if (destExists) {
+      output += `'${destFile}' already exists - not overwritten`;
+    } else {
+      output += `${isRename ? `Renamed '${source}' to '${destFile}'` : `Moved '${source}' to '${destFile}'`}`;
+    }
+    
+    document.getElementById("mvNOutput").textContent = output;
+  }
+
+  // Update mv command
+  function runMvUpdate() {
+    const source = document.getElementById("mvUSourceFile").value.split(' ')[0];
+    const dest = document.getElementById("mvUDestFolder").value.split(' ')[0];
+    const isRename = !dest.includes('/');
+    const destFile = isRename ? dest : dest + source;
+    
+    const sourceDate = getFileModifiedDate(source);
+    const destDate = getFileModifiedDate(destFile);
+    
+    let output = `$ mv -u ${source} ${dest}\n`;
+    
+    if (!destDate || new Date(sourceDate) > new Date(destDate)) {
+      output += `${isRename ? `Renamed '${source}' to '${destFile}'` : `Moved '${source}' to '${destFile}'`}`;
+    } else {
+      output += `'${destFile}' is up to date - not moved`;
+    }
+    
+    document.getElementById("mvUOutput").textContent = output;
+  }
+
+  // Verbose mv command
+  function runMvVerbose() {
+    const source = document.getElementById("mvVSourceFile").value;
+    const dest = document.getElementById("mvVDestFolder").value;
+    const isRename = !dest.includes('/');
+    const destFile = isRename ? dest : dest + source;
+    
+    const output = `$ mv -v ${source} ${dest}\n` +
+                   `${isRename ? `'${source}' -> '${destFile}'` : `'${source}' -> '${destFile}'`}`;
+    
+    document.getElementById("mvVOutput").textContent = output;
+  }
+
+  // Helper functions
+  function checkFileExists(path) {
+    const parts = path.split('/');
+    let current = fileSystem['/home/user/'];
+    
+    for (const part of parts) {
+      if (part && current[part] === undefined) {
+        return false;
+      }
+      if (part) {
+        current = current[part];
+      }
+    }
+    return true;
+  }
+
+  function getFileModifiedDate(path) {
+    const parts = path.split('/');
+    let current = fileSystem['/home/user/'];
+    
+    for (const part of parts) {
+      if (part && current[part] === undefined) {
+        return null;
+      }
+      if (part) {
+        current = current[part];
+      }
+    }
+    return current.modified || null;
+  }
+
+  // Initialize on page load
+  window.onload = function() {
+    // No initialization needed for this simulation
+  };
+</script>
+
+</body>
+</html>
