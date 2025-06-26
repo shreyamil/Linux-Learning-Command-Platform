@@ -1,0 +1,793 @@
+/* CSS Variables for Theming */
+:root {
+  --bg-color: #f4f4f4;
+  --text-color: #333;
+  --header-bg: #333;
+  --header-text: white;
+  --hero-bg: #1e1e1e;
+  --hero-text: white;
+  --button-bg: #00ff88;
+  --button-hover-bg: #1a73e8;
+  --footer-bg: #333;
+  --footer-text: white;
+}
+
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #f4f4f4;
+  --header-bg: #1e1e1e;
+  --header-text: #ffffff;
+  --hero-bg: #222;
+  --hero-text: #ffffff;
+  --button-bg: #4caf50;
+  --button-hover-bg: #2196f3;
+  --footer-bg: #1e1e1e;
+  --footer-text: #cccccc;
+}
+
+/* Main layout and structure */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  padding: 10px 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+header nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+}
+
+header nav a {
+  color: var(--header-text);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  padding: 60px 20px;
+  background-color: var(--hero-bg);
+  color: var(--hero-text);
+  text-align: center;
+  border-radius: 8px;
+  margin: 20px;
+}
+
+button, .button {
+  background-color: var(--button-bg);
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button:hover, button:hover {
+  transform: scale(1.05);
+  background-color: var(--button-hover-bg);
+}
+
+footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 15px 20px;
+  text-align: center;
+  margin-top: 30px;
+}
+/* Command list section */
+.command-list {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.command-list h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.command-list .subtitle {
+  font-size: 1rem;
+  color: gray;
+  margin-bottom: 30px;
+}
+
+.command-items {
+  list-style: none;
+  padding: 0;
+}
+
+.command-items li {
+  margin: 15px 0;
+}
+
+.command-items a {
+  display: inline-block;
+  padding: 12px 20px;
+  background-color: var(--button-bg);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
+}
+
+.command-items a:hover {
+  background-color: var(--button-hover-bg);
+  transform: translateY(-2px);
+}
+
+/* About Us Page Styling */
+.about-section {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .about-section {
+  background-color: #1e1e1e;
+  color: #ddd;
+}
+
+.about-content h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.about-content h3 {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  color: #34495e;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.about-content ul {
+  list-style-type: disc;
+  padding-left: 30px;
+}
+
+.about-content li {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+/* Header */
+header h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+}
+
+header nav {
+  text-align: center;
+  margin-top: 20px;
+}
+
+header nav a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #333;
+  margin: 0 10px;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+  color: #007bff;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+body.dark-mode footer {
+  background-color: #1e1e1e;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .about-content h2 {
+    font-size: 1.8rem;
+  }
+
+  .about-content h3 {
+    font-size: 1.4rem;
+  }
+
+  .about-content p, .about-content li {
+    font-size: 1rem;
+  }
+}
+/* Contact Page Styling */
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  font-size: 2rem;
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  color: #00aaff;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* About and Contact Page Styling */
+.main-section {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.about-section, .contact-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.about-content h2, .contact-content p {
+  color: #333;
+}
+
+.about-content ul {
+  list-style-type: disc;
+  padding-left: 30px;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.about-content li {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode header {
+  background-color: #1e1c1c;
+}
+
+body.dark-mode nav a {
+  color: #ddd;
+}
+
+body.dark-mode footer {
+  background-color: #1f1f1f;
+}
+
+body.dark-mode .about-section, body.dark-mode .contact-section {
+  background-color: #222;
+  color: #ddd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  nav a {
+    font-size: 1rem;
+    margin: 0 8px;
+  }
+
+  .main-section {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .about-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .about-content h3 {
+    font-size: 1.4rem;
+  }
+
+  .about-content p, .about-content li {
+    font-size: 1rem;
+  }
+}
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+  font-size: 2rem;
+  color: #f3eeee; /* Ensure the title is visible in light mode */
+}
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+  color: #00aaff;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* About and Contact Page Styling */
+.main-section {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.about-section, .contact-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.about-content h2, .contact-content p {
+  color: #333;
+}
+
+.about-content ul {
+  list-style-type: disc;
+  padding-left: 30px;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.about-content li {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode header {
+  background-color: #1f1f1f;
+}
+
+body.dark-mode header h1 {
+  color: #e0e0e0; /* Ensure the title is visible in dark mode */
+}
+
+body.dark-mode nav a {
+  color: #ddd;
+}
+
+body.dark-mode footer {
+  background-color: #1f1f1f;
+}
+
+body.dark-mode .about-section, body.dark-mode .contact-section {
+  background-color: #222;
+  color: #ddd;
+}
+
+body.dark-mode .about-content h2,
+body.dark-mode .contact-content p {
+  color: #e0e0e0; /* Make the text more visible in dark mode */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  nav a {
+    font-size: 1rem;
+    margin: 0 8px;
+  }
+
+  .main-section {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  .about-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .about-content h3 {
+    font-size: 1.4rem;
+  }
+
+  .about-content p, .about-content li {
+    font-size: 1rem;
+  }
+}
+/* ===== Base Reset & Transitions ===== */
+* {
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #222222;
+}
+
+/* ===== Header & Footer ===== */
+header, footer {
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+  color: #222;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header nav a, footer a {
+  margin: 0 15px;
+  color: #007acc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header nav a:hover, footer a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Command Details Section ===== */
+.command-details {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Headings ===== */
+h1, h2, h3 {
+  color: #e3d4d4;
+  margin-top: 0;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== Example Code Block ===== */
+pre {
+  background-color: #eeeeee;
+  padding: 15px;
+  border-radius: 8px;
+  overflow-x: auto;
+  color: #eee2e2;
+  font-size: 1rem;
+}
+
+/* ===== Links ===== */
+a {
+  color: #007acc;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #005f99;
+  text-decoration: underline;
+}
+
+/* ===== Toggle Button ===== */
+#darkModeToggle {
+  margin-top: 15px;
+  padding: 10px 18px;
+  background-color: #007acc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#darkModeToggle:hover {
+  background-color: #005f99;
+}
+
+/* ===== DARK MODE ===== */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #e4e4e4;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark-mode .command-details {
+  background-color: #2c2c2c;
+  color: #e4e4e4;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode pre {
+  background-color: #3b3b3b;
+  color: #e4e4e4;
+}
+
+body.dark-mode a {
+  color: #4fdde6;
+}
+
+body.dark-mode a:hover {
+  color: #36bac1;
+}
+
+body.dark-mode #darkModeToggle {
+  background-color: #444444;
+  color: #ffffff;
+}
+
+body.dark-mode #darkModeToggle:hover {
+  background-color: #c46464;
+}
+title {
+  color: #a78181; /* Very dark text for visibility on light backgrounds */
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #222222;
+}
+
+h1, h2, h3 {
+  color: #faf7f7; /* Default color for headings */
+  margin-top: 0;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #e4e4e4;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+  color: #ffffff; /* Headings color in dark mode */
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.2);
+}
+
+/* Reset some basic styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header and navigation */
+header {
+  background-color: #2d2d2d;
+  padding: 1rem 2rem;
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+nav a:hover,
+nav a:focus {
+  color: #4caf50;
+  outline: none;
+}
+
+/* Main content area */
+main.command-list {
+  flex-grow: 1;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+}
+
+main.command-list h2 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+  text-align: center;
+  color: #222;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+/* Command list */
+.command-items {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.command-items li a {
+  display: block;
+  padding: 0.75rem 1rem;
+  background-color: #e0f2e9;
+  border-left: 5px solid #4caf50;
+  color: #2d2d2d;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.command-items li a:hover,
+.command-items li a:focus {
+  background-color: #4caf50;
+  color: #fff;
+  outline: none;
+}
+
+/* Footer */
+footer {
+  background-color: #2d2d2d;
+  color: #bbb;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  margin-top: auto;
+  user-select: none;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  main.command-list {
+    margin: 1rem;
+  }
+}
