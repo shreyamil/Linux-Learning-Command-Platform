@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux Commands Learning Platform - cat Command</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #f0c93d;
+    }
+    h3 {
+      color: #35c7f3;
+    }
+    a {
+      color: #35c7f3;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    nav a {
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    header {
+      margin-bottom: 20px;
+      border-bottom: 2px solid #35c7f3;
+      padding-bottom: 10px;
+    }
+    section.overview {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    section.command-box {
+      background: #222;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    code {
+      background: #333;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #f0c93d;
+    }
+    input[type="text"] {
+      background: #111;
+      border: 1px solid #555;
+      border-radius: 4px;
+      padding: 8px;
+      width: 300px;
+      color: #eee;
+      font-family: monospace;
+      margin-right: 10px;
+    }
+    textarea {
+      background: #111;
+      border: 1px solid #555;
+      border-radius: 4px;
+      padding: 8px;
+      width: 100%;
+      color: #eee;
+      font-family: monospace;
+      margin-top: 10px;
+      min-height: 100px;
+    }
+    button {
+      background: #35c7f3;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: #121212;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #27a1d9;
+    }
+    .output {
+      background: #111;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      min-height: 60px;
+      color: #c5c5c5;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #333;
+      color: #f0c93d;
+    }
+    tr:nth-child(even) {
+      background-color: #222;
+    }
+    tr:hover {
+      background-color: #333;
+    }
+    .file-contents {
+      margin-top: 10px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+      border-radius: 4px;
+    }
+    .file-contents h3 {
+      margin-top: 0;
+      color: #f0c93d;
+    }
+    .line-number {
+      color: #888;
+      margin-right: 10px;
+      display: inline-block;
+      width: 20px;
+      text-align: right;
+    }
+    .end-line {
+      color: #35c7f3;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="../">Home</a>
+    <a href="../commandlist.html">Command List</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+  <h1>Working With Files: <code>cat</code></h1>
+</header>
+
+<section class="overview">
+  <h2>File Content Commands</h2>
+  <p>The <code>cat</code> command is used to display and manipulate file contents:</p>
+  <table>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td><code>cat file</code></td>
+      <td>Display contents of a file</td>
+    </tr>
+    <tr>
+      <td><code>cat -b</code></td>
+      <td>Add line numbers to non-blank lines</td>
+    </tr>
+    <tr>
+      <td><code>cat -n</code></td>
+      <td>Add line numbers to all lines</td>
+    </tr>
+    <tr>
+      <td><code>cat -s</code></td>
+      <td>Squeeze blank lines into one line</td>
+    </tr>
+    <tr>
+      <td><code>cat -E</code></td>
+      <td>Show $ at end of each line</td>
+    </tr>
+    <tr>
+      <td><code>cat > file</code></td>
+      <td>Create new file with content</td>
+    </tr>
+    <tr>
+      <td><code>cat >> file</code></td>
+      <td>Append content to existing file</td>
+    </tr>
+  </table>
+</section>
+
+<section class="command-box" id="cat-basic">
+  <h2><code>cat file</code> - Display File Contents</h2>
+  <ol>
+    <li><strong>What it does:</strong> Shows the contents of one or more text files</li>
+    <li><strong>When to use:</strong> To quickly view file contents</li>
+    <li><strong>Example:</strong> 
+      <pre><code>cat example.txt
+Hello World
+This is a sample file.</code></pre>
+    </li>
+  </ol>
+  <select id="catFileSelect">
+    <option value="example.txt">example.txt</option>
+    <option value="notes.txt">notes.txt</option>
+    <option value="config.txt">config.txt</option>
+  </select>
+  <button onclick="runCatBasic()">Run command: cat file</button>
+  <div class="output" id="catBasicOutput"></div>
+</section>
+
+<section class="command-box" id="cat-b">
+  <h2><code>cat -b</code> - Number Non-Blank Lines</h2>
+  <ol>
+    <li><strong>What it does:</strong> Adds line numbers to non-empty lines</li>
+    <li><strong>When to use:</strong> When you need to reference specific content lines</li>
+    <li><strong>Example:</strong> 
+      <pre><code>cat -b example.txt
+     1  Hello World
+     2  This is a sample file.</code></pre>
+    </li>
+  </ol>
+  <select id="catBFileSelect">
+    <option value="example.txt">example.txt</option>
+    <option value="spaced.txt">spaced.txt</option>
+    <option value="code.py">code.py</option>
+  </select>
+  <button onclick="runCatB()">Run command: cat -b</button>
+  <div class="output" id="catBOutput"></div>
+</section>
+
+<section class="command-box" id="cat-n">
+  <h2><code>cat -n</code> - Number All Lines</h2>
+  <ol>
+    <li><strong>What it does:</strong> Numbers all lines including empty ones</li>
+    <li><strong>When to use:</strong> When you need absolute line numbers</li>
+    <li><strong>Example:</strong> 
+      <pre><code>cat -n example.txt
+     1  Hello World
+     2
+     3  This is a sample file.</code></pre>
+    </li>
+  </ol>
+  <select id="catNFileSelect">
+    <option value="example.txt">example.txt</option>
+    <option value="spaced.txt">spaced.txt</option>
+    <option value="script.sh">script.sh</option>
+  </select>
+  <button onclick="runCatN()">Run command: cat -n</button>
+  <div class="output" id="catNOutput"></div>
+</section>
+
+<section class="command-box" id="cat-s">
+  <h2><code>cat -s</code> - Squeeze Blank Lines</h2>
+  <ol>
+    <li><strong>What it does:</strong> Reduces multiple blank lines to single ones</li>
+    <li><strong>When to use:</strong> To clean up files with excessive spacing</li>
+    <li><strong>Example:</strong> 
+      <pre><code>cat -s spaced.txt
+Hello World
+
+This is a sample file.</code></pre>
+    </li>
+  </ol>
+  <select id="catSFileSelect">
+    <option value="spaced.txt">spaced.txt</option>
+    <option value="logfile.txt">logfile.txt</option>
+  </select>
+  <button onclick="runCatS()">Run command: cat -s</button>
+  <div class="output" id="catSOutput"></div>
+</section>
+
+<section class="command-box" id="cat-E">
+  <h2><code>cat -E</code> - Show Line Ends</h2>
+  <ol>
+    <li><strong>What it does:</strong> Displays $ at the end of each line</li>
+    <li><strong>When to use:</strong> To identify line endings and trailing spaces</li>
+    <li><strong>Example:</strong> 
+      <pre><code>cat -E example.txt
+Hello World$
+This is a sample file.$</code></pre>
+    </li>
+  </ol>
+  <select id="catEFileSelect">
+    <option value="example.txt">example.txt</option>
+    <option value="script.sh">script.sh</option>
+  </select>
+  <button onclick="runCatE()">Run command: cat -E</button>
+  <div class="output" id="catEOutput"></div>
+</section>
+
+<section class="command-box" id="cat-create">
+  <h2><code>cat > file</code> - Create File</h2>
+  <ol>
+    <li><strong>What it does:</strong> Creates a new file with content from terminal</li>
+    <li><strong>When to use:</strong> To quickly create small text files</li>
+    <li><strong>Example:</strong> 
+      <pre><code>cat > newfile.txt
+Type your content here
+Press Ctrl+D to save</code></pre>
+    </li>
+  </ol>
+  <input type="text" id="newFileName" placeholder="Enter new filename (e.g. file.txt)" />
+  <textarea id="newFileContent" placeholder="Type file content here..."></textarea>
+  <button onclick="runCatCreate()">Run command: cat > file</button>
+  <div class="output" id="catCreateOutput"></div>
+  <div id="createdFileContents" class="file-contents" style="display: none;">
+    <h3>Created file contents:</h3>
+    <div id="createdFileText" class="output"></div>
+  </div>
+</section>
+
+<section class="command-box" id="cat-append">
+  <h2><code>cat >> file</code> - Append to File</h2>
+  <ol>
+    <li><strong>What it does:</strong> Adds content to the end of an existing file</li>
+    <li><strong>When to use:</strong> To update files without overwriting</li>
+    <li><strong>Example:</strong> 
+      <pre><code>cat >> existing.txt
+Additional content
+Press Ctrl+D to append</code></pre>
+    </li>
+  </ol>
+  <select id="appendFileSelect">
+    <option value="notes.txt">notes.txt</option>
+    <option value="log.txt">log.txt</option>
+  </select>
+  <textarea id="appendContent" placeholder="Type content to append here..."></textarea>
+  <button onclick="runCatAppend()">Run command: cat >> file</button>
+  <div class="output" id="catAppendOutput"></div>
+  <div id="appendedFileContents" class="file-contents" style="display: none;">
+    <h3>Updated file contents:</h3>
+    <div id="appendedFileText" class="output"></div>
+  </div>
+</section>
+
+<script>
+  // Sample file contents
+  const files = {
+    'example.txt': 'Jai kishan Kukreti\nThis is a my PBL project.',
+    'notes.txt': 'Ayushi moti Bisht\nProject deadline: 5.00 pm\nTeam lunch tomorrow with Shreya kandpal and Sonali Rawat',
+    'config.txt': '[settings]\nusername=admin\npassword=secret\nport=8080',
+    'spaced.txt': 'Hello World\n\n\n\nThis is a sample file.\n\nWith extra spaces.',
+    'code.py': 'def hello():\n    print("Hello World")\n\n\nif __name__ == "__main__":\n    hello()',
+    'script.sh': '#!/bin/bash\n\necho "Starting script"\n\n# Main logic here\n\necho "Done"',
+    'logfile.txt': '2023-01-01: System started\n\n2023-01-01: User logged in\n\n\n2023-01-02: Backup completed',
+    'notes.txt': 'Meeting at 10am\nProject deadline: Friday\nTeam lunch tomorrow',
+    'log.txt': '[INFO] System started\n[WARN] Low disk space'
+  };
+
+  // Track created/modified files
+  let customFiles = {...files};
+
+  // Basic cat command
+  function runCatBasic() {
+    const filename = document.getElementById("catFileSelect").value;
+    const output = document.getElementById("catBasicOutput");
+    output.textContent = `$ cat ${filename}\n` + (customFiles[filename] || files[filename] || "File not found");
+  }
+
+  // cat -b (number non-blank lines)
+  function runCatB() {
+    const filename = document.getElementById("catBFileSelect").value;
+    const content = customFiles[filename] || files[filename] || "";
+    const lines = content.split('\n');
+    let outputText = `$ cat -b ${filename}\n`;
+    let lineNum = 1;
+    
+    for (const line of lines) {
+      if (line.trim() !== '') {
+        outputText += `${lineNum.toString().padStart(6)}  ${line}\n`;
+        lineNum++;
+      } else {
+        outputText += `${line}\n`;
+      }
+    }
+    
+    document.getElementById("catBOutput").textContent = outputText;
+  }
+
+  // cat -n (number all lines)
+  function runCatN() {
+    const filename = document.getElementById("catNFileSelect").value;
+    const content = customFiles[filename] || files[filename] || "";
+    const lines = content.split('\n');
+    let outputText = `$ cat -n ${filename}\n`;
+    
+    lines.forEach((line, index) => {
+      outputText += `${(index + 1).toString().padStart(6)}  ${line}\n`;
+    });
+    
+    document.getElementById("catNOutput").textContent = outputText;
+  }
+
+  // cat -s (squeeze blanks)
+  function runCatS() {
+    const filename = document.getElementById("catSFileSelect").value;
+    const content = customFiles[filename] || files[filename] || "";
+    const lines = content.split('\n');
+    let outputText = `$ cat -s ${filename}\n`;
+    let lastLineEmpty = false;
+    
+    for (const line of lines) {
+      if (line.trim() === '') {
+        if (!lastLineEmpty) {
+          outputText += `${line}\n`;
+          lastLineEmpty = true;
+        }
+      } else {
+        outputText += `${line}\n`;
+        lastLineEmpty = false;
+      }
+    }
+    
+    document.getElementById("catSOutput").textContent = outputText;
+  }
+
+  // cat -E (show line ends)
+  function runCatE() {
+    const filename = document.getElementById("catEFileSelect").value;
+    const content = customFiles[filename] || files[filename] || "";
+    const lines = content.split('\n');
+    let outputText = `$ cat -E ${filename}\n`;
+    
+    lines.forEach(line => {
+      outputText += `${line}$\n`;
+    });
+    
+    document.getElementById("catEOutput").textContent = outputText;
+  }
+
+  // cat > (create file)
+  function runCatCreate() {
+    const filename = document.getElementById("newFileName").value.trim();
+    const content = document.getElementById("newFileContent").value;
+    const output = document.getElementById("catCreateOutput");
+    const fileContentsDiv = document.getElementById("createdFileContents");
+    const fileContentsText = document.getElementById("createdFileText");
+    
+    if (filename) {
+      customFiles[filename] = content;
+      output.textContent = `$ cat > ${filename}\nFile created successfully. Pressed Ctrl+D to save.`;
+      fileContentsText.textContent = content;
+      fileContentsDiv.style.display = "block";
+    } else {
+      output.textContent = "Please enter a filename.";
+      fileContentsDiv.style.display = "none";
+    }
+  }
+
+  // cat >> (append to file)
+  function runCatAppend() {
+    const filename = document.getElementById("appendFileSelect").value;
+    const content = document.getElementById("appendContent").value;
+    const output = document.getElementById("catAppendOutput");
+    const fileContentsDiv = document.getElementById("appendedFileContents");
+    const fileContentsText = document.getElementById("appendedFileText");
+    
+    if (content) {
+      const currentContent = customFiles[filename] || files[filename] || "";
+      customFiles[filename] = currentContent + '\n' + content;
+      output.textContent = `$ cat >> ${filename}\nContent appended successfully. Pressed Ctrl+D to save.`;
+      fileContentsText.textContent = customFiles[filename];
+      fileContentsDiv.style.display = "block";
+    } else {
+      output.textContent = "Please enter content to append.";
+      fileContentsDiv.style.display = "none";
+    }
+  }
+</script>
+
+</body>
+</html>
