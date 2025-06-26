@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux Commands Learning Platform - mkdir Command</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #f0c93d;
+    }
+    h3 {
+      color: #35c7f3;
+    }
+    a {
+      color: #35c7f3;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    nav a {
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    header {
+      margin-bottom: 20px;
+      border-bottom: 2px solid #35c7f3;
+      padding-bottom: 10px;
+    }
+    section.overview {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    section.command-box {
+      background: #222;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .command-section {
+      flex: 1;
+      min-width: 300px;
+    }
+    .file-section {
+      flex: 1;
+      min-width: 300px;
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 6px;
+    }
+    code {
+      background: #333;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #f0c93d;
+    }
+    select {
+      background: #111;
+      border: 1px solid #555;
+      border-radius: 4px;
+      padding: 8px;
+      color: #eee;
+      font-family: monospace;
+      margin-right: 10px;
+      width: 200px;
+    }
+    button {
+      background: #35c7f3;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: #121212;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #27a1d9;
+    }
+    .output {
+      background: #111;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      min-height: 60px;
+      color: #c5c5c5;
+    }
+    .file-content {
+      background: #111;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      max-height: 300px;
+      overflow-y: auto;
+      color: #c5c5c5;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #333;
+      color: #f0c93d;
+    }
+    tr:nth-child(even) {
+      background-color: #222;
+    }
+    tr:hover {
+      background-color: #333;
+    }
+    .file-title {
+      color: #35c7f3;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .file-system {
+      margin-top: 10px;
+    }
+    .file-item {
+      margin-left: 20px;
+    }
+    .directory {
+      color: #35c7f3;
+    }
+    .file {
+      color: #f0c93d;
+    }
+    .hidden {
+      color: #888;
+    }
+    .message {
+      color: #4CAF50;
+      font-style: italic;
+    }
+    .warning {
+      color: #ff9800;
+    }
+    input[type="text"] {
+      background: #111;
+      border: 1px solid #555;
+      border-radius: 4px;
+      padding: 8px;
+      color: #eee;
+      font-family: monospace;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="../">Home</a>
+    <a href="../commandlist.html">Command List</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+  <h1>Working With Directories: <code>mkdir</code></h1>
+</header>
+
+<section class="overview">
+  <h2>Directory Creation Commands</h2>
+  <p>The <code>mkdir</code> command creates new directories:</p>
+  <table>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td><code>mkdir dirname</code></td>
+      <td>Basic directory creation</td>
+    </tr>
+    <tr>
+      <td><code>mkdir -p parent/child</code></td>
+      <td>Creates parent and child directories</td>
+    </tr>
+    <tr>
+      <td><code>mkdir --parents parent/child</code></td>
+      <td>Same as <code>-p</code> (long form)</td>
+    </tr>
+    <tr>
+      <td><code>mkdir -p parent/{child1,child2}</code></td>
+      <td>Creates multiple subdirectories</td>
+    </tr>
+  </table>
+</section>
+
+<section class="command-box" id="mkdir-basic">
+  <div class="command-section">
+    <h2><code>mkdir dirname</code> - Basic Directory Creation</h2>
+    <ol>
+      <li><strong>What it does:</strong> Creates a single directory</li>
+      <li><strong>When to use:</strong> When you need a new empty directory</li>
+      <li><strong>Example:</strong> 
+        <pre><code>mkdir projects
+# Creates a 'projects' directory</code></pre>
+      </li>
+    </ol>
+    <input type="text" id="mkdirBasicName" placeholder="Enter directory name" value="newfolder">
+    <button onclick="runMkdirBasic()">Run command</button>
+    <div class="output" id="mkdirBasicOutput">Output will appear here</div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">Current Directory:</div>
+    <div class="file-system" id="fileSystemBasic">
+      <div class="directory">/home/user/</div>
+      <div class="directory">documents/</div>
+      <div class="directory">downloads/</div>
+      <div class="file-item"><span class="file">notes.txt</span></div>
+      <div class="file-item"><span class="file">config.cfg</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="command-box" id="mkdir-parents">
+  <div class="command-section">
+    <h2><code>mkdir -p path/to/dir</code> - Parent Directories</h2>
+    <ol>
+      <li><strong>What it does:</strong> Creates all directories in path</li>
+      <li><strong>When to use:</strong> When parent directories don't exist</li>
+      <li><strong>Example:</strong> 
+        <pre><code>mkdir -p project/source/code
+# Creates project/, project/source/, and project/source/code/</code></pre>
+      </li>
+    </ol>
+    <input type="text" id="mkdirParentsPath" placeholder="Enter directory path" value="project/source/code">
+    <button onclick="runMkdirParents()">Run command</button>
+    <div class="output" id="mkdirParentsOutput">Output will appear here</div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">Current Directory:</div>
+    <div class="file-system" id="fileSystemParents">
+      <div class="directory">/home/user/</div>
+      <div class="directory">documents/</div>
+      <div class="directory">downloads/</div>
+      <div class="file-item"><span class="file">notes.txt</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="command-box" id="mkdir-multiple">
+  <div class="command-section">
+    <h2><code>mkdir -p parent/{dir1,dir2}</code> - Multiple Directories</h2>
+    <ol>
+      <li><strong>What it does:</strong> Creates multiple subdirectories</li>
+      <li><strong>When to use:</strong> When you need several directories at once</li>
+      <li><strong>Example:</strong> 
+        <pre><code>mkdir -p website/{images,styles,scripts}
+# Creates website/images/, website/styles/, and website/scripts/</code></pre>
+      </li>
+    </ol>
+    <input type="text" id="mkdirParentDir" placeholder="Parent directory" value="website">
+    <input type="text" id="mkdirSubDirs" placeholder="Subdirectories (comma separated)" value="images,styles,scripts">
+    <button onclick="runMkdirMultiple()">Run command</button>
+    <div class="output" id="mkdirMultipleOutput">Output will appear here</div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">Current Directory:</div>
+    <div class="file-system" id="fileSystemMultiple">
+      <div class="directory">/home/user/</div>
+      <div class="directory">documents/</div>
+      <div class="file-item"><span class="file">index.html</span></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  let fileSystem = {
+    '/home/user/': {
+      'documents/': { type: 'dir' },
+      'downloads/': { type: 'dir' },
+      'notes.txt': { type: 'file' },
+      'config.cfg': { type: 'file' },
+      'index.html': { type: 'file' }
+    }
+  };
+
+  function runMkdirBasic() {
+    const dirName = document.getElementById("mkdirBasicName").value.trim();
+    if (!dirName) {
+      document.getElementById("mkdirBasicOutput").textContent = "Error: Please enter a directory name";
+      return;
+    }
+    if (checkFileExists(dirName + '/')) {
+      document.getElementById("mkdirBasicOutput").textContent = 
+        `$ mkdir ${dirName}\nmkdir: cannot create directory '${dirName}': File exists`;
+      return;
+    }
+    const output = `$ mkdir ${dirName}\nCreated directory '${dirName}'`;
+    document.getElementById("mkdirBasicOutput").textContent = output;
+    updateFileSystemVisualization('fileSystemBasic', dirName);
+  }
+
+  function runMkdirParents() {
+    const path = document.getElementById("mkdirParentsPath").value.trim();
+    if (!path) {
+      document.getElementById("mkdirParentsOutput").textContent = "Error: Please enter a directory path";
+      return;
+    }
+    const output = `$ mkdir -p ${path}\nCreated directory path '${path}'`;
+    document.getElementById("mkdirParentsOutput").textContent = output;
+    updateFileSystemVisualization('fileSystemParents', path.split('/')[0]);
+  }
+
+  function runMkdirMultiple() {
+    const parentDir = document.getElementById("mkdirParentDir").value.trim();
+    const subDirs = document.getElementById("mkdirSubDirs").value.trim();
+    if (!parentDir || !subDirs) {
+      document.getElementById("mkdirMultipleOutput").textContent = "Error: Please enter both parent directory and subdirectories";
+      return;
+    }
+    const dirList = subDirs.split(',').map(dir => dir.trim()).filter(dir => dir);
+    const output = `$ mkdir -p ${parentDir}/{${dirList.join(',')}}\nCreated directories:\n` +
+                   dirList.map(dir => `${parentDir}/${dir}`).join('\n');
+    document.getElementById("mkdirMultipleOutput").textContent = output;
+    updateFileSystemVisualization('fileSystemMultiple', parentDir);
+  }
+
+  function checkFileExists(path) {
+    const parts = path.split('/');
+    let current = fileSystem['/home/user/'];
+    for (const part of parts) {
+      if (part && current[part] === undefined) {
+        return false;
+      }
+      if (part) {
+        current = current[part];
+      }
+    }
+    return true;
+  }
+
+  function updateFileSystemVisualization(elementId, newDir) {
+    const fileSystemElement = document.getElementById(elementId);
+    const newDirElement = document.createElement('div');
+    newDirElement.className = 'directory';
+    newDirElement.textContent = newDir + '/';
+    fileSystemElement.appendChild(newDirElement);
+  }
+
+  window.onload = function() {};
+</script>
+
+</body>
+</html>
