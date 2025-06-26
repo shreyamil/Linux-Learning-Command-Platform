@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux Commands Learning Platform - sort Command</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #f0c93d;
+    }
+    h3 {
+      color: #35c7f3;
+    }
+    a {
+      color: #35c7f3;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    nav a {
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    header {
+      margin-bottom: 20px;
+      border-bottom: 2px solid #35c7f3;
+      padding-bottom: 10px;
+    }
+    section.overview {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    section.command-box {
+      background: #222;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .command-section {
+      flex: 1;
+      min-width: 300px;
+    }
+    .file-section {
+      flex: 1;
+      min-width: 300px;
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 6px;
+    }
+    code {
+      background: #333;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #f0c93d;
+    }
+    select {
+      background: #111;
+      border: 1px solid #555;
+      border-radius: 4px;
+      padding: 8px;
+      color: #eee;
+      font-family: monospace;
+      margin-right: 10px;
+      width: 200px;
+    }
+    button {
+      background: #35c7f3;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: #121212;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #27a1d9;
+    }
+    .output {
+      background: #111;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      min-height: 60px;
+      color: #c5c5c5;
+    }
+    .file-content {
+      background: #111;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      max-height: 300px;
+      overflow-y: auto;
+      color: #c5c5c5;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #333;
+      color: #f0c93d;
+    }
+    tr:nth-child(even) {
+      background-color: #222;
+    }
+    tr:hover {
+      background-color: #333;
+    }
+    .file-title {
+      color: #35c7f3;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .sort-arrow {
+      color: #4CAF50;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="../">Home</a>
+    <a href="../commandlist.html">Command List</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+  <h1>Working With Files: <code>sort</code></h1>
+</header>
+
+<section class="overview">
+  <h2>Sorting Commands</h2>
+  <p>The <code>sort</code> command organizes file contents alphabetically or numerically:</p>
+  <table>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td><code>sort file</code></td>
+      <td>Basic alphabetical sort</td>
+    </tr>
+    <tr>
+      <td><code>sort file1 file2</code></td>
+      <td>Sort contents of multiple files</td>
+    </tr>
+    <tr>
+      <td><code>sort -r file</code></td>
+      <td>Reverse sort order</td>
+    </tr>
+    <tr>
+      <td><code>sort -f file</code></td>
+      <td>Case-insensitive sort</td>
+    </tr>
+    <tr>
+      <td><code>sort -n file</code></td>
+      <td>Numerical sort</td>
+    </tr>
+  </table>
+</section>
+
+<section class="command-box" id="sort-basic">
+  <div class="command-section">
+    <h2><code>sort file</code> - Basic Sort</h2>
+    <ol>
+      <li><strong>What it does:</strong> Sorts lines alphabetically</li>
+      <li><strong>When to use:</strong> When you need ordered output</li>
+      <li><strong>Example:</strong> 
+        <pre><code>sort fruits.txt
+apple
+banana
+orange</code></pre>
+      </li>
+    </ol>
+    <select id="sortFileSelect" onchange="updateFileDisplay()">
+      <option value="fruits.txt">fruits.txt</option>
+      <option value="numbers.txt">numbers.txt</option>
+      <option value="mixed_case.txt">mixed_case.txt</option>
+      <option value="names.txt">names.txt</option>
+    </select>
+    <button onclick="runSortBasic()">Run command</button>
+    <div class="output" id="sortBasicOutput">Output will appear here</div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">Original File: <span id="currentFilename">fruits.txt</span></div>
+    <div class="file-content" id="fileDisplay"></div>
+  </div>
+</section>
+
+<section class="command-box" id="sort-multi">
+  <div class="command-section">
+    <h2><code>sort file1 file2</code> - Multiple Files</h2>
+    <ol>
+      <li><strong>What it does:</strong> Combines and sorts multiple files</li>
+      <li><strong>When to use:</strong> When merging sorted data from sources</li>
+      <li><strong>Example:</strong> 
+        <pre><code>sort file1.txt file2.txt
+apple
+banana
+grape
+orange</code></pre>
+      </li>
+    </ol>
+    <select id="sortFile1Select" onchange="updateMultiFileDisplay()">
+      <option value="fruits.txt">fruits.txt</option>
+      <option value="vegetables.txt">vegetables.txt</option>
+    </select>
+    <select id="sortFile2Select" onchange="updateMultiFileDisplay()">
+      <option value="more_fruits.txt">more_fruits.txt</option>
+      <option value="colors.txt">colors.txt</option>
+    </select>
+    <button onclick="runSortMulti()">Run command</button>
+    <div class="output" id="sortMultiOutput">Output will appear here</div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">Files to Sort:</div>
+    <div class="file-title">File 1: <span id="currentFile1">fruits.txt</span></div>
+    <div class="file-content" id="file1Display"></div>
+    <div class="file-title">File 2: <span id="currentFile2">more_fruits.txt</span></div>
+    <div class="file-content" id="file2Display"></div>
+  </div>
+</section>
+
+<section class="command-box" id="sort-reverse">
+  <div class="command-section">
+    <h2><code>sort -r file</code> - Reverse Sort</h2>
+    <ol>
+      <li><strong>What it does:</strong> Sorts in reverse order (Z-A, 9-0)</li>
+      <li><strong>When to use:</strong> When you need descending order</li>
+      <li><strong>Example:</strong> 
+        <pre><code>sort -r fruits.txt
+orange
+banana
+apple</code></pre>
+      </li>
+    </ol>
+    <select id="sortReverseFileSelect" onchange="updateReverseFileDisplay()">
+      <option value="fruits.txt">fruits.txt</option>
+      <option value="numbers.txt">numbers.txt</option>
+      <option value="names.txt">names.txt</option>
+    </select>
+    <button onclick="runSortReverse()">Run command</button>
+    <div class="output" id="sortReverseOutput">Output will appear here</div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">Original File: <span id="currentReverseFilename">fruits.txt</span></div>
+    <div class="file-content" id="reverseFileDisplay"></div>
+  </div>
+</section>
+
+<section class="command-box" id="sort-case">
+  <div class="command-section">
+    <h2><code>sort -f file</code> - Case Insensitive</h2>
+    <ol>
+      <li><strong>What it does:</strong> Ignores case when sorting</li>
+      <li><strong>When to use:</strong> With mixed-case data</li>
+      <li><strong>Example:</strong> 
+        <pre><code>sort -f mixed_case.txt
+apple
+Banana
+cherry
+Orange</code></pre>
+      </li>
+    </ol>
+    <select id="sortCaseFileSelect" onchange="updateCaseFileDisplay()">
+      <option value="mixed_case.txt">mixed_case.txt</option>
+      <option value="programming.txt">programming.txt</option>
+    </select>
+    <button onclick="runSortCase()">Run command</button>
+    <div class="output" id="sortCaseOutput">Output will appear here</div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">Original File: <span id="currentCaseFilename">mixed_case.txt</span></div>
+    <div class="file-content" id="caseFileDisplay"></div>
+  </div>
+</section>
+
+<section class="command-box" id="sort-numeric">
+  <div class="command-section">
+    <h2><code>sort -n file</code> - Numerical Sort</h2>
+    <ol>
+      <li><strong>What it does:</strong> Sorts by numerical value</li>
+      <li><strong>When to use:</strong> With numeric data instead of text</li>
+      <li><strong>Example:</strong> 
+        <pre><code>sort -n numbers.txt
+5
+10
+20
+100</code></pre>
+      </li>
+    </ol>
+    <select id="sortNumericFileSelect" onchange="updateNumericFileDisplay()">
+      <option value="numbers.txt">numbers.txt</option>
+      <option value="prices.txt">prices.txt</option>
+      <option value="scores.txt">scores.txt</option>
+    </select>
+    <button onclick="runSortNumeric()">Run command</button>
+    <div class="output" id="sortNumericOutput">Output will appear here</div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">Original File: <span id="currentNumericFilename">numbers.txt</span></div>
+    <div class="file-content" id="numericFileDisplay"></div>
+  </div>
+</section>
+
+<script>
+  // Sample file contents
+  const files = {
+    'fruits.txt': `banana
+apple
+orange
+grape`,
+    'more_fruits.txt': `kiwi
+mango
+pear
+apple`,
+    'vegetables.txt': `carrot
+broccoli
+spinach
+potato`,
+    'colors.txt': `red
+blue
+green
+yellow`,
+    'numbers.txt': `10
+5
+100
+20
+1`,
+    'mixed_case.txt': `Banana
+apple
+Orange
+cherry`,
+    'names.txt': `Charlie
+alice
+Bob
+dave`,
+    'programming.txt': `Python
+java
+C++
+javascript`,
+    'prices.txt': `19.99
+5.50
+100.00
+2.99`,
+    'scores.txt': `1500
+850
+1200
+500`
+  };
+
+  // Initialize file displays
+  function initializeFileDisplays() {
+    updateFileDisplay();
+    updateMultiFileDisplay();
+    updateReverseFileDisplay();
+    updateCaseFileDisplay();
+    updateNumericFileDisplay();
+  }
+
+  // Update file displays
+  function updateFileDisplay() {
+    const filename = document.getElementById("sortFileSelect").value;
+    document.getElementById("currentFilename").textContent = filename;
+    document.getElementById("fileDisplay").textContent = files[filename] || "File not found";
+  }
+
+  function updateMultiFileDisplay() {
+    const file1 = document.getElementById("sortFile1Select").value;
+    const file2 = document.getElementById("sortFile2Select").value;
+    document.getElementById("currentFile1").textContent = file1;
+    document.getElementById("currentFile2").textContent = file2;
+    document.getElementById("file1Display").textContent = files[file1] || "File not found";
+    document.getElementById("file2Display").textContent = files[file2] || "File not found";
+  }
+
+  function updateReverseFileDisplay() {
+    const filename = document.getElementById("sortReverseFileSelect").value;
+    document.getElementById("currentReverseFilename").textContent = filename;
+    document.getElementById("reverseFileDisplay").textContent = files[filename] || "File not found";
+  }
+
+  function updateCaseFileDisplay() {
+    const filename = document.getElementById("sortCaseFileSelect").value;
+    document.getElementById("currentCaseFilename").textContent = filename;
+    document.getElementById("caseFileDisplay").textContent = files[filename] || "File not found";
+  }
+
+  function updateNumericFileDisplay() {
+    const filename = document.getElementById("sortNumericFileSelect").value;
+    document.getElementById("currentNumericFilename").textContent = filename;
+    document.getElementById("numericFileDisplay").textContent = files[filename] || "File not found";
+  }
+
+  // Basic sort command
+  function runSortBasic() {
+    const filename = document.getElementById("sortFileSelect").value;
+    const content = files[filename] || "";
+    const lines = content.split('\n').filter(line => line.trim() !== '');
+    lines.sort();
+    document.getElementById("sortBasicOutput").textContent = 
+      `$ sort ${filename}\n` + lines.join('\n');
+  }
+
+  // Sort multiple files
+  function runSortMulti() {
+    const file1 = document.getElementById("sortFile1Select").value;
+    const file2 = document.getElementById("sortFile2Select").value;
+    const content1 = files[file1] || "";
+    const content2 = files[file2] || "";
+    const lines = (content1 + '\n' + content2).split('\n').filter(line => line.trim() !== '');
+    lines.sort();
+    document.getElementById("sortMultiOutput").textContent = 
+      `$ sort ${file1} ${file2}\n` + lines.join('\n');
+  }
+
+  // Reverse sort
+  function runSortReverse() {
+    const filename = document.getElementById("sortReverseFileSelect").value;
+    const content = files[filename] || "";
+    const lines = content.split('\n').filter(line => line.trim() !== '');
+    lines.sort().reverse();
+    document.getElementById("sortReverseOutput").textContent = 
+      `$ sort -r ${filename}\n` + lines.join('\n');
+  }
+
+  // Case insensitive sort
+  function runSortCase() {
+    const filename = document.getElementById("sortCaseFileSelect").value;
+    const content = files[filename] || "";
+    const lines = content.split('\n').filter(line => line.trim() !== '');
+    lines.sort((a, b) => a.localeCompare(b, undefined, {sensitivity: 'base'}));
+    document.getElementById("sortCaseOutput").textContent = 
+      `$ sort -f ${filename}\n` + lines.join('\n');
+  }
+
+  // Numeric sort
+  function runSortNumeric() {
+    const filename = document.getElementById("sortNumericFileSelect").value;
+    const content = files[filename] || "";
+    const lines = content.split('\n').filter(line => line.trim() !== '');
+    lines.sort((a, b) => parseFloat(a) - parseFloat(b));
+    document.getElementById("sortNumericOutput").textContent = 
+      `$ sort -n ${filename}\n` + lines.join('\n');
+  }
+
+  // Initialize on page load
+  window.onload = initializeFileDisplays;
+</script>
+
+</body>
+</html>
