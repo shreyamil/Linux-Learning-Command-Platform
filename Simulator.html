@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Terminal Simulator</title>
+    <style>
+        body {
+            font-family: 'Fira Code', monospace;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #terminal {
+            width: 90%;
+            max-width: 800px;
+            height: 600px;
+            background-color: #252526;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-y: auto;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+        }
+        #output {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .output-line {
+            margin: 5px 0;
+            white-space: pre-wrap;
+        }
+        .command-text {
+            color: #9cdcfe;
+        }
+        .error-text {
+            color: #f48771;
+        }
+        #dirList {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .directory, .file {
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            min-width: 80px;
+            background-color: #3c3c3c;
+            color: white;
+        }
+        .file {
+            background-color: #007acc;
+        }
+        #commandInput {
+            background-color: #1e1e1e;
+            border: 1px solid #555;
+            padding: 10px;
+            color: #d4d4d4;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="terminal">
+    <div id="output"></div>
+    <input id="commandInput" type="text" placeholder="Type a command..." autofocus />
+</div>
+
+<script>
+// Basic virtual file system structure
+const commandInput = document.getElementById("commandInput");
+const output = document.getElementById("output");
+
+let root = { name: "", type: "folder", children: [], parent: null };
+
+function createFolder(name, parent) {
+  const folder = { name, type: "folder", children: [], parent };
+  parent.children.push(folder);
+  return folder;
+}
+
+function createFile(name, parent, content = "") {
+  const file = { name, type: "file", content, parent };
+  parent.children.push(file);
+  return file;
+}
+
+// Initial folder structure
+const rootFolder = createFolder("root", root);
+createFolder("etc", rootFolder);
+createFolder("bin", rootFolder);
+createFolder("usr", rootFolder);
+createFolder("var", rootFolder);
+const home = createFolder("home", rootFolder);
+const user = createFolder("user", home);
+createFile("readme.txt", user, "Welcome to your virtual terminal!");
+createFile("notes.md", user, "This is a markdown notes file.");
+
+let currentDir = user;
+let history = [];
+let historyIndex = -1;
+
+commandInput.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    const input = commandInput.value.trim();
+    if (input) {
+      history.push(input);
+      historyIndex = history.length;
+      const [cmd, ...args] = input.split(" ");
+      logToOutput(`$ ${input}`, "command-text");
+      handleCommand(cmd, args.join(" "));
+      commandInput.value = "";
+    }
+  } else if (event.key === "ArrowUp") {
+    if (historyIndex > 0) {
+      historyIndex--;
+      commandInput.value = history[historyIndex];
+    }
+  } else if (event.key === "ArrowDown") {
+    if (historyIndex < history.length - 1) {
+      historyIndex++;
+      commandInput.value = history[historyIndex];
+    } else {
+      commandInput.value = "";
+    }
+  }
+});
+
+function handleCommand(cmd, arg) {
+  const args = arg.trim().split(" ");
+  switch (cmd) {
+    case "mkdir":
+      if (!arg) return logToOutput("Please provide a folder name.", "error-text");
+      const isRecursive = args[0] === "-p";
+      const folderPath = isRecursive ? args.slice(1).join(" ") : args.join(" ");
+      const segments = folderPath.split("/").filter(Boolean);
+      let pointer = folderPath.startsWith("/") ? root : currentDir;
+      for (let i = 0; i < segments.length; i++) {
+        let part = segments[i];
+        let found = pointer.children.find(c => c.name === part && c.type === "folder");
+        if (!found) {
+          if (isRecursive || i === segments.length - 1) {
+            found = createFolder(part, pointer);
+          } else {
+            return logToOutput(`Folder ${part} doesn't exist. Use mkdir -p for nested.`, "error-text");
+          }
+        }
+        pointer = found;
+      }
+      renderDirectory();
+      break;
+
+    case "cd":
+      if (!arg) return logToOutput("Please provide a folder path.", "error-text");
+      const result = resolvePath(arg, currentDir);
+      if (result && result.type === "folder") {
+        currentDir = result;
+        renderDirectory();
+      } else {
+        logToOutput("Invalid folder path.", "error-text");
+      }
+      break;
+
+    case "touch":
+      if (!arg) return logToOutput("Please provide a file name.", "error-text");
+      if (exists(arg)) return logToOutput("File or folder already exists.", "error-text");
+      createFile(arg, currentDir, "");
+      renderDirectory();
+      break;
+
+    case "ls":
+      if (currentDir.children.length === 0) {
+        logToOutput("No files or folders.");
+      } else {
+        const names = currentDir.children.map(c => `${c.name}${c.type === "folder" ? "/" : ""}`);
+        logToOutput("Contents: " + names.join(", "));
+      }
+      break;
+
+    case "pwd":
+      logToOutput(getPath(currentDir));
+      break;
+
+    case "clear":
+      output.innerHTML = "";
+      break;
+
+    case "rm":
+      const fileIndex = currentDir.children.findIndex(c => c.name === arg && c.type === "file");
+      if (fileIndex !== -1) {
+        currentDir.children.splice(fileIndex, 1);
+        renderDirectory();
+      } else {
+        logToOutput("File not found.", "error-text");
+      }
+      break;
+
+    case "rmdir":
+      const folderIndex = currentDir.children.findIndex(c => c.name === arg && c.type === "folder");
+      if (folderIndex !== -1) {
+        const folder = currentDir.children[folderIndex];
+        if (folder.children.length === 0) {
+          currentDir.children.splice(folderIndex, 1);
+          renderDirectory();
+        } else {
+          logToOutput("Folder is not empty.", "error-text");
+        }
+      } else {
+        logToOutput("Folder not found.", "error-text");
+      }
+      break;
+
+    case "cat":
+      const file = currentDir.children.find(c => c.name === arg && c.type === "file");
+      if (!file) return logToOutput("File not found.", "error-text");
+      logToOutput(file.content || "[Empty file]");
+      break;
+
+    case "echo":
+      const match = arg.match(/^(.+)\s*>\s*(\S+)$/);
+      if (!match) return logToOutput("Usage: echo text > filename", "error-text");
+      const [_, content, fname] = match;
+      let target = currentDir.children.find(c => c.name === fname && c.type === "file");
+      if (!target) {
+        target = createFile(fname, currentDir, content);
+      } else {
+        target.content = content;
+      }
+      renderDirectory();
+      break;
+
+    case "tree":
+      function tree(node, indent = "") {
+        let result = `${indent}${node.name || "/"}/\n`;
+        node.children?.forEach(child => {
+          result += child.type === "folder"
+            ? tree(child, indent + "  ")
+            : `${indent}  ${child.name}\n`;
+        });
+        return result;
+      }
+      logToOutput(tree(currentDir));
+      break;
+
+    case "help":
+      logToOutput("Commands: mkdir [-p], cd, ls, touch, rm, rmdir, cat, echo, tree, pwd, clear, help");
+      break;
+
+    default:
+      logToOutput(`Unknown command: ${cmd}`, "error-text");
+  }
+}
+
+function resolvePath(pathStr, from) {
+  let parts = pathStr.split("/").filter(Boolean);
+  let current = pathStr.startsWith("/") ? root : from;
+  for (let part of parts) {
+    if (part === ".") continue;
+    if (part === "..") {
+      if (current.parent) current = current.parent;
+    } else {
+      const next = current.children.find(c => c.name === part && c.type === "folder");
+      if (!next) return null;
+      current = next;
+    }
+  }
+  return current;
+}
+
+function getPath(node) {
+  const parts = [];
+  while (node && node.name !== "") {
+    parts.unshift(node.name);
+    node = node.parent;
+  }
+  return "/" + parts.join("/");
+}
+
+function exists(name) {
+  return currentDir.children.some(c => c.name === name);
+}
+
+function renderDirectory() {
+  const path = getPath(currentDir);
+  const pathDiv = document.createElement("div");
+  pathDiv.classList.add("output-line");
+  pathDiv.innerHTML = `<strong>📂 ${path}</strong>`;
+  output.appendChild(pathDiv);
+
+  const dirList = document.createElement("div");
+  dirList.id = "dirList";
+
+  currentDir.children.forEach(child => {
+    const itemDiv = document.createElement("div");
+    itemDiv.className = child.type === "folder" ? "directory" : "file";
+    itemDiv.textContent = child.type === "folder" ? `[📁] ${child.name}` : `[📄] ${child.name}`;
+    dirList.appendChild(itemDiv);
+  });
+
+  output.appendChild(dirList);
+  output.scrollTop = output.scrollHeight;
+}
+
+function logToOutput(text, className = "") {
+  const div = document.createElement("div");
+  div.className = `output-line ${className}`;
+  div.textContent = text;
+  output.appendChild(div);
+  output.scrollTop = output.scrollHeight;
+}
+
+renderDirectory();
+logToOutput("Welcome to your Linux-like virtual terminal. Type 'help' to see commands.");
+</script>
+
+</body>
+</html>
