@@ -1,0 +1,818 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  main {
+    max-width: 900px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  h2, h3 {
+    color: #2c3e50;
+  }
+  
+  pre {
+    background: #eee;
+    padding: 10px;
+    overflow-x: auto;
+  }
+  
+  ul, ol {
+    padding-left: 20px;
+  }
+  
+  /* File: css/responsive.css */
+  @media (max-width: 768px) {
+    main {
+      padding: 15px;
+    }
+  
+    header h1, nav ul li a, footer p {
+      font-size: 16px;
+    }
+  
+    nav ul {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  /* styles/command-pages.css */
+
+  body.dark-mode {
+    background-color: #121212;
+    color: #f1f1f1;
+  }
+  
+  body.dark-mode a {
+    color: #90caf9;
+  }
+  
+  body.dark-mode .simulator-container {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+  }
+  /* Global Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header nav {
+  margin-top: 10px;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1rem;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+  color: #00aaff;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Command Details Section */
+.command-details {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.command-details h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.command-details p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.command-details h3 {
+  font-size: 1.8rem;
+  margin-top: 30px;
+  color: #2c3e50;
+}
+
+.command-details .example-box {
+  background-color: #f1f1f1;
+  border-left: 5px solid #00ffcc;
+  margin: 20px 0;
+  padding: 15px;
+  color: #333;
+}
+
+.command-details .example-box h4 {
+  font-size: 1.3rem;
+  color: #00aaff;
+}
+
+.command-details .example-box p {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.command-details .link-btn {
+  display: inline-block;
+  background-color: #00ffcc;
+  color: #333;
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.command-details .link-btn:hover {
+  background-color: #00aaff;
+  transform: scale(1.05);
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode header {
+  background-color: #1f1f1f;
+}
+
+body.dark-mode header nav a {
+  color: #ddd;
+}
+
+body.dark-mode footer {
+  background-color: #1f1f1f;
+}
+
+body.dark-mode .command-details {
+  background-color: #222;
+  color: #ddd;
+}
+
+body.dark-mode .command-details h1,
+body.dark-mode .command-details h3 {
+  color: #00ffcc;
+}
+
+body.dark-mode .command-details .example-box {
+  background-color: #333;
+  border-left: 5px solid #00ffcc;
+}
+
+body.dark-mode .command-details .link-btn {
+  background-color: #00aaff;
+  color: #fff;
+}
+
+body.dark-mode .command-details .link-btn:hover {
+  background-color: #00ffcc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .command-details {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .command-details h1 {
+    font-size: 2rem;
+  }
+
+  .command-details h3 {
+    font-size: 1.6rem;
+  }
+
+  .command-details .example-box {
+    padding: 12px;
+  }
+
+  .command-details .link-btn {
+    padding: 10px 20px;
+  }
+}
+/* Global Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header nav {
+  margin-top: 10px;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1rem;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+  color: #00aaff;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Command Details Section */
+.command-details {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.command-details h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.command-details p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.command-details h3 {
+  font-size: 1.8rem;
+  margin-top: 30px;
+  color: #2c3e50;
+}
+
+.command-details .example-box {
+  background-color: #f1f1f1;
+  border-left: 5px solid #00ffcc;
+  margin: 20px 0;
+  padding: 15px;
+  color: #333;
+}
+
+.command-details .example-box h4 {
+  font-size: 1.3rem;
+  color: #00aaff;
+}
+
+.command-details .example-box p {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.command-details .link-btn {
+  display: inline-block;
+  background-color: #00ffcc;
+  color: #333;
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.command-details .link-btn:hover {
+  background-color: #00aaff;
+  transform: scale(1.05);
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode header {
+  background-color: #1f1f1f;
+}
+
+body.dark-mode header nav a {
+  color: #ddd;
+}
+
+body.dark-mode footer {
+  background-color: #1f1f1f;
+}
+
+body.dark-mode .command-details {
+  background-color: #222;
+  color: #ddd;
+}
+
+body.dark-mode .command-details h1,
+body.dark-mode .command-details h3 {
+  color: #00ffcc;
+}
+
+body.dark-mode .command-details .example-box {
+  background-color: #333;
+  border-left: 5px solid #00ffcc;
+}
+
+body.dark-mode .command-details .link-btn {
+  background-color: #00aaff;
+  color: #fff;
+}
+
+body.dark-mode .command-details .link-btn:hover {
+  background-color: #00ffcc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .command-details {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .command-details h1 {
+    font-size: 2rem;
+  }
+
+  .command-details h3 {
+    font-size: 1.6rem;
+  }
+
+  .command-details .example-box {
+    padding: 12px;
+  }
+
+  .command-details .link-btn {
+    padding: 10px 20px;
+  }
+}
+
+/* Global Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header nav {
+  margin-top: 10px;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 1.1rem;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+  color: #00aaff;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 15px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Command Details Section */
+.command-details {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.command-details h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.command-details p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.command-details h3 {
+  font-size: 1.8rem;
+  margin-top: 30px;
+  color: #2c3e50;
+}
+
+.command-details .example-box {
+  background-color: #f1f1f1;
+  border-left: 5px solid #00ffcc;
+  margin: 20px 0;
+  padding: 15px;
+  color: #333;
+}
+
+.command-details .example-box h4 {
+  font-size: 1.3rem;
+  color: #00aaff;
+}
+
+.command-details .example-box p {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.command-details .link-btn {
+  display: inline-block;
+  background-color: #00ffcc;
+  color: #333;
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.command-details .link-btn:hover {
+  background-color: #00aaff;
+  transform: scale(1.05);
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode header {
+  background-color: #1f1f1f;
+}
+
+body.dark-mode header nav a {
+  color: #ddd;
+}
+
+body.dark-mode footer {
+  background-color: #1f1f1f;
+}
+
+body.dark-mode .command-details {
+  background-color: #222;
+  color: #ddd;
+}
+
+body.dark-mode .command-details h1,
+body.dark-mode .command-details h3 {
+  color: #00ffcc;
+}
+
+body.dark-mode .command-details .example-box {
+  background-color: #333;
+  border-left: 5px solid #00ffcc;
+}
+
+body.dark-mode .command-details .link-btn {
+  background-color: #00aaff;
+  color: #fff;
+}
+
+body.dark-mode .command-details .link-btn:hover {
+  background-color: #00ffcc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .command-details {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  .command-details h1 {
+    font-size: 2rem;
+  }
+
+  .command-details h3 {
+    font-size: 1.6rem;
+  }
+
+  .command-details .example-box {
+    padding: 12px;
+  }
+
+  .command-details .link-btn {
+    padding: 10px 20px;
+  }
+}
+/* General page styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+nav a {
+  color: #00ffcc;
+  text-decoration: none;
+  margin: 0 1rem;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+/* Command details styling */
+.command-details {
+  background-color: #fff;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 800px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.command-details h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.command-details h3 {
+  font-size: 1.5rem;
+  color: #444;
+  margin-top: 1.5rem;
+}
+
+.command-details p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.8;
+}
+
+.command-details pre {
+  background-color: #2e2e2e;
+  color: #f4f4f4;
+  padding: 1rem;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-size: 1rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Link styling */
+a {
+  color: #00ffcc;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Footer Styling */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  margin-top: 3rem;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+  .command-details {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  nav {
+    text-align: center;
+  }
+
+  nav a {
+    margin: 0.5rem;
+    display: inline-block;
+  }
+}
+/* ===== Base Reset & Transitions ===== */
+* {
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #222222;
+}
+
+/* ===== Header & Footer ===== */
+header, footer {
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+  color: #222;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header nav a, footer a {
+  margin: 0 15px;
+  color: #007acc;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header nav a:hover, footer a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Command Details Section ===== */
+.command-details {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== Headings ===== */
+h1, h2, h3 {
+  color: #111111;
+  margin-top: 0;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== Example Code Block ===== */
+pre {
+  background-color: #eeeeee;
+  padding: 15px;
+  border-radius: 8px;
+  overflow-x: auto;
+  color: #222;
+  font-size: 1rem;
+}
+
+/* ===== Links ===== */
+a {
+  color: #007acc;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #005f99;
+  text-decoration: underline;
+}
+
+/* ===== Toggle Button ===== */
+#darkModeToggle {
+  margin-top: 15px;
+  padding: 10px 18px;
+  background-color: #007acc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#darkModeToggle:hover {
+  background-color: #005f99;
+}
+
+/* ===== DARK MODE ===== */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #e4e4e4;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark-mode .command-details {
+  background-color: #2c2c2c;
+  color: #e4e4e4;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode pre {
+  background-color: #3b3b3b;
+  color: #e4e4e4;
+}
+
+body.dark-mode a {
+  color: #4fdde6;
+}
+
+body.dark-mode a:hover {
+  color: #36bac1;
+}
+
+body.dark-mode #darkModeToggle {
+  background-color: #444444;
+  color: #ffffff;
+}
+
+body.dark-mode #darkModeToggle:hover {
+  background-color: #666666;
+}
