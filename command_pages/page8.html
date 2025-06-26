@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux Commands Learning Platform - cp Command</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #f0c93d;
+    }
+    h3 {
+      color: #35c7f3;
+    }
+    a {
+      color: #35c7f3;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    nav a {
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    header {
+      margin-bottom: 20px;
+      border-bottom: 2px solid #35c7f3;
+      padding-bottom: 10px;
+    }
+    section.overview {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    section.command-box {
+      background: #222;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .command-section {
+      flex: 1;
+      min-width: 300px;
+    }
+    .file-section {
+      flex: 1;
+      min-width: 300px;
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 6px;
+    }
+    code {
+      background: #333;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #f0c93d;
+    }
+    select {
+      background: #111;
+      border: 1px solid #555;
+      border-radius: 4px;
+      padding: 8px;
+      color: #eee;
+      font-family: monospace;
+      margin-right: 10px;
+      width: 200px;
+    }
+    button {
+      background: #35c7f3;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: #121212;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #27a1d9;
+    }
+    .output {
+      background: #111;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      min-height: 60px;
+      color: #c5c5c5;
+    }
+    .file-content {
+      background: #111;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      max-height: 300px;
+      overflow-y: auto;
+      color: #c5c5c5;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #333;
+      color: #f0c93d;
+    }
+    tr:nth-child(even) {
+      background-color: #222;
+    }
+    tr:hover {
+      background-color: #333;
+    }
+    .file-title {
+      color: #35c7f3;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .file-system {
+      margin-top: 10px;
+    }
+    .file-item {
+      margin-left: 20px;
+    }
+    .directory {
+      color: #35c7f3;
+    }
+    .file {
+      color: #f0c93d;
+    }
+    .hidden {
+      color: #888;
+    }
+    .message {
+      color: #4CAF50;
+      font-style: italic;
+    }
+    .warning {
+      color: #ff9800;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="../">Home</a>
+    <a href="../commandlist.html">Command List</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+  <h1>Working With Files: <code>cp</code></h1>
+</header>
+
+<section class="overview">
+  <h2>File Copy Commands</h2>
+  <p>The <code>cp</code> command copies files and directories:</p>
+  <table>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td><code>cp source dest</code></td>
+      <td>Basic file copy</td>
+    </tr>
+    <tr>
+      <td><code>cp -i source dest</code></td>
+      <td>Interactive mode (prompts before overwrite)</td>
+    </tr>
+    <tr>
+      <td><code>cp -n source dest</code></td>
+      <td>No overwrite</td>
+    </tr>
+    <tr>
+      <td><code>cp -u source dest</code></td>
+      <td>Update (only if source is newer)</td>
+    </tr>
+    <tr>
+      <td><code>cp -R source dest</code></td>
+      <td>Recursive copy (for directories)</td>
+    </tr>
+    <tr>
+      <td><code>cp -v source dest</code></td>
+      <td>Verbose mode</td>
+    </tr>
+  </table>
+</section>
+
+<section class="command-box" id="cp-basic">
+  <div class="command-section">
+    <h2><code>cp source dest</code> - Basic Copy</h2>
+    <ol>
+      <li><strong>What it does:</strong> Copies file to new location</li>
+      <li><strong>When to use:</strong> For simple file duplication</li>
+      <li><strong>Example:</strong> 
+        <pre><code>cp document.txt backup/
+# Copies document.txt to backup folder</code></pre>
+      </li>
+    </ol>
+    <select id="cpSourceFile">
+      <option value="document.txt">document.txt</option>
+      <option value="config.cfg">config.cfg</option>
+      <option value="notes.md">notes.md</option>
+    </select>
+    <select id="cpDestFolder">
+      <option value="backup/">backup/</option>
+      <option value="archive/">archive/</option>
+      <option value="temp/">temp/</option>
+    </select>
+    <button onclick="runCpBasic()">Run command</button>
+    <div class="output" id="cpBasicOutput">Output will appear here</div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">File System:</div>
+    <div class="file-system" id="fileSystemBasic">
+      <div class="directory">/home/user/</div>
+      <div class="file-item"><span class="file">document.txt</span> (2023-01-10 09:15)</div>
+      <div class="file-item"><span class="file">config.cfg</span> (2023-01-09 14:30)</div>
+      <div class="file-item"><span class="file">notes.md</span> (2023-01-11 10:45)</div>
+      <div class="directory">backup/</div>
+      <div class="directory">archive/</div>
+      <div class="directory">temp/</div>
+    </div>
+  </div>
+</section>
+
+<section class="command-box" id="cp-interactive">
+  <div class="command-section">
+    <h2><code>cp -i source dest</code> - Interactive</h2>
+    <ol>
+      <li><strong>What it does:</strong> Prompts before overwriting</li>
+      <li><strong>When to use:</strong> When you want to prevent accidental overwrites</li>
+      <li><strong>Example:</strong> 
+        <pre><code>cp -i notes.txt backup/
+cp: overwrite 'backup/notes.txt'? (y/n)</code></pre>
+      </li>
+    </ol>
+    <select id="cpISourceFile">
+      <option value="notes.txt">notes.txt</option>
+      <option value="report.pdf">report.pdf</option>
+    </select>
+    <select id="cpIDestFolder">
+      <option value="backup/">backup/</option>
+      <option value="shared/">shared/</option>
+    </select>
+    <button onclick="runCpInteractive()">Run command</button>
+    <div class="output" id="cpInteractiveOutput">Output will appear here</div>
+    <div id="interactivePrompt" style="display: none; margin-top: 10px;">
+      <span class="warning">Overwrite destination file? (y/n)</span>
+      <input type="text" id="interactiveAnswer" style="width: 50px; margin: 0 10px;">
+      <button onclick="handleInteractiveAnswer()">Submit</button>
+    </div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">File System:</div>
+    <div class="file-system" id="fileSystemInteractive">
+      <div class="directory">/home/user/</div>
+      <div class="file-item"><span class="file">notes.txt</span> (2023-01-12 11:20)</div>
+      <div class="file-item"><span class="file">report.pdf</span> (2023-01-11 15:10)</div>
+      <div class="directory">backup/</div>
+      <div class="file-item"><span class="file">notes.txt</span> (2023-01-10 09:15)</div>
+      <div class="directory">shared/</div>
+    </div>
+  </div>
+</section>
+
+<section class="command-box" id="cp-recursive">
+  <div class="command-section">
+    <h2><code>cp -R source dest</code> - Recursive</h2>
+    <ol>
+      <li><strong>What it does:</strong> Copies directories recursively</li>
+      <li><strong>When to use:</strong> When copying folder structures</li>
+      <li><strong>Example:</strong> 
+        <pre><code>cp -R project/ backup/
+# Copies entire project folder</code></pre>
+      </li>
+    </ol>
+    <select id="cpRSourceDir">
+      <option value="project/">project/</option>
+      <option value="data/">data/</option>
+    </select>
+    <select id="cpRDestDir">
+      <option value="backup/">backup/</option>
+      <option value="archive/">archive/</option>
+    </select>
+    <button onclick="runCpRecursive()">Run command</button>
+    <div class="output" id="cpROutput">Output will appear here</div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">File System:</div>
+    <div class="file-system" id="fileSystemRecursive">
+      <div class="directory">/home/user/</div>
+      <div class="directory">project/</div>
+      <div class="file-item"><span class="file">index.html</span></div>
+      <div class="file-item"><span class="file">style.css</span></div>
+      <div class="directory">images/</div>
+      <div class="file-item"><span class="file">logo.png</span></div>
+      <div class="directory">data/</div>
+      <div class="file-item"><span class="file">dataset1.csv</span></div>
+      <div class="file-item"><span class="file">dataset2.csv</span></div>
+      <div class="directory">backup/</div>
+      <div class="directory">archive/</div>
+    </div>
+  </div>
+</section>
+
+<section class="command-box" id="cp-options">
+  <div class="command-section">
+    <h2>Other Common Options</h2>
+    
+    <h3><code>cp -n source dest</code> - No Overwrite</h3>
+    <p>Prevents overwriting existing files</p>
+    <select id="cpNSourceFile">
+      <option value="config.txt">config.txt</option>
+      <option value="settings.ini">settings.ini</option>
+    </select>
+    <select id="cpNDestFolder">
+      <option value="backup/">backup/</option>
+      <option value="configs/">configs/</option>
+    </select>
+    <button onclick="runCpNoOverwrite()">Run command</button>
+    <div class="output" id="cpNOutput"></div>
+    
+    <h3><code>cp -u source dest</code> - Update</h3>
+    <p>Only copies if source is newer</p>
+    <select id="cpUSourceFile">
+      <option value="data.json">data.json (2023-01-15)</option>
+      <option value="log.txt">log.txt (2023-01-14)</option>
+    </select>
+    <select id="cpUDestFolder">
+      <option value="backup/">backup/ (contains older data.json)</option>
+      <option value="logs/">logs/</option>
+    </select>
+    <button onclick="runCpUpdate()">Run command</button>
+    <div class="output" id="cpUOutput"></div>
+    
+    <h3><code>cp -v source dest</code> - Verbose</h3>
+    <p>Shows detailed copy process</p>
+    <select id="cpVSourceFile">
+      <option value="report.doc">report.doc</option>
+      <option value="presentation.ppt">presentation.ppt</option>
+    </select>
+    <select id="cpVDestFolder">
+      <option value="backup/">backup/</option>
+      <option value="presentations/">presentations/</option>
+    </select>
+    <button onclick="runCpVerbose()">Run command</button>
+    <div class="output" id="cpVOutput"></div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">File System Details:</div>
+    <div class="file-system">
+      <div class="directory">/home/user/</div>
+      <div class="file-item"><span class="file">config.txt</span> (2023-01-13)</div>
+      <div class="file-item"><span class="file">settings.ini</span> (2023-01-12)</div>
+      <div class="file-item"><span class="file">data.json</span> (2023-01-15)</div>
+      <div class="file-item"><span class="file">log.txt</span> (2023-01-14)</div>
+      <div class="file-item"><span class="file">report.doc</span></div>
+      <div class="file-item"><span class="file">presentation.ppt</span></div>
+      
+      <div class="directory">backup/</div>
+      <div class="file-item"><span class="file">config.txt</span> (2023-01-10)</div>
+      <div class="file-item"><span class="file">data.json</span> (2023-01-10)</div>
+      
+      <div class="directory">configs/</div>
+      <div class="directory">logs/</div>
+      <div class="directory">presentations/</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Track file system state
+  let fileSystem = {
+    '/home/user/': {
+      'document.txt': { type: 'file', modified: '2023-01-10 09:15' },
+      'config.cfg': { type: 'file', modified: '2023-01-09 14:30' },
+      'notes.md': { type: 'file', modified: '2023-01-11 10:45' },
+      'notes.txt': { type: 'file', modified: '2023-01-12 11:20' },
+      'report.pdf': { type: 'file', modified: '2023-01-11 15:10' },
+      'config.txt': { type: 'file', modified: '2023-01-13' },
+      'settings.ini': { type: 'file', modified: '2023-01-12' },
+      'data.json': { type: 'file', modified: '2023-01-15' },
+      'log.txt': { type: 'file', modified: '2023-01-14' },
+      'report.doc': { type: 'file' },
+      'presentation.ppt': { type: 'file' },
+      'backup/': {
+        type: 'dir',
+        'notes.txt': { type: 'file', modified: '2023-01-10 09:15' },
+        'config.txt': { type: 'file', modified: '2023-01-10' },
+        'data.json': { type: 'file', modified: '2023-01-10' }
+      },
+      'archive/': { type: 'dir' },
+      'temp/': { type: 'dir' },
+      'shared/': { type: 'dir' },
+      'configs/': { type: 'dir' },
+      'logs/': { type: 'dir' },
+      'presentations/': { type: 'dir' },
+      'project/': {
+        type: 'dir',
+        'index.html': { type: 'file' },
+        'style.css': { type: 'file' },
+        'images/': {
+          type: 'dir',
+          'logo.png': { type: 'file' }
+        }
+      },
+      'data/': {
+        type: 'dir',
+        'dataset1.csv': { type: 'file' },
+        'dataset2.csv': { type: 'file' }
+      }
+    }
+  };
+
+  // Basic cp command
+  function runCpBasic() {
+    const source = document.getElementById("cpSourceFile").value;
+    const dest = document.getElementById("cpDestFolder").value;
+    
+    // Simulate copy
+    const output = `$ cp ${source} ${dest}\n` +
+                   `Copied '${source}' to '${dest}${source}'`;
+    
+    document.getElementById("cpBasicOutput").textContent = output;
+  }
+
+  // Interactive cp command
+  function runCpInteractive() {
+    const source = document.getElementById("cpISourceFile").value;
+    const dest = document.getElementById("cpIDestFolder").value;
+    const destFile = dest + source;
+    
+    // Check if destination exists
+    const destExists = checkFileExists(destFile);
+    
+    if (destExists) {
+      document.getElementById("cpInteractiveOutput").textContent = 
+        `$ cp -i ${source} ${dest}\n` +
+        `cp: overwrite '${destFile}'?`;
+      document.getElementById("interactivePrompt").style.display = "block";
+      window.currentCopyOperation = { source, dest };
+    } else {
+      document.getElementById("cpInteractiveOutput").textContent = 
+        `$ cp -i ${source} ${dest}\n` +
+        `Copied '${source}' to '${destFile}'`;
+      document.getElementById("interactivePrompt").style.display = "none";
+    }
+  }
+
+  function handleInteractiveAnswer() {
+    const answer = document.getElementById("interactiveAnswer").value.toLowerCase();
+    const operation = window.currentCopyOperation;
+    const destFile = operation.dest + operation.source;
+    
+    let output = `$ cp -i ${operation.source} ${operation.dest}\n`;
+    
+    if (answer === 'y') {
+      output += `Copied '${operation.source}' to '${destFile}' (overwritten)`;
+    } else {
+      output += `Not overwriting '${destFile}'`;
+    }
+    
+    document.getElementById("cpInteractiveOutput").textContent = output;
+    document.getElementById("interactivePrompt").style.display = "none";
+    document.getElementById("interactiveAnswer").value = "";
+  }
+
+  // Recursive cp command
+  function runCpRecursive() {
+    const source = document.getElementById("cpRSourceDir").value;
+    const dest = document.getElementById("cpRDestDir").value;
+    
+    const output = `$ cp -R ${source} ${dest}\n` +
+                   `Copied directory '${source}' to '${dest}${source}' recursively`;
+    
+    document.getElementById("cpROutput").textContent = output;
+  }
+
+  // No overwrite cp command
+  function runCpNoOverwrite() {
+    const source = document.getElementById("cpNSourceFile").value;
+    const dest = document.getElementById("cpNDestFolder").value;
+    const destFile = dest + source;
+    
+    const destExists = checkFileExists(destFile);
+    
+    let output = `$ cp -n ${source} ${dest}\n`;
+    
+    if (destExists) {
+      output += `'${destFile}' already exists - not overwritten`;
+    } else {
+      output += `Copied '${source}' to '${destFile}'`;
+    }
+    
+    document.getElementById("cpNOutput").textContent = output;
+  }
+
+  // Update cp command
+  function runCpUpdate() {
+    const source = document.getElementById("cpUSourceFile").value.split(' ')[0];
+    const dest = document.getElementById("cpUDestFolder").value.split(' ')[0];
+    const destFile = dest + source;
+    
+    const sourceDate = getFileModifiedDate(source);
+    const destDate = getFileModifiedDate(destFile);
+    
+    let output = `$ cp -u ${source} ${dest}\n`;
+    
+    if (!destDate || new Date(sourceDate) > new Date(destDate)) {
+      output += `Updated '${destFile}' with newer '${source}'`;
+    } else {
+      output += `'${destFile}' is up to date - not copied`;
+    }
+    
+    document.getElementById("cpUOutput").textContent = output;
+  }
+
+  // Verbose cp command
+  function runCpVerbose() {
+    const source = document.getElementById("cpVSourceFile").value;
+    const dest = document.getElementById("cpVDestFolder").value;
+    const destFile = dest + source;
+    
+    const output = `$ cp -v ${source} ${dest}\n` +
+                   `'${source}' -> '${destFile}'`;
+    
+    document.getElementById("cpVOutput").textContent = output;
+  }
+
+  // Helper functions
+  function checkFileExists(path) {
+    const parts = path.split('/');
+    let current = fileSystem['/home/user/'];
+    
+    for (const part of parts) {
+      if (part && current[part] === undefined) {
+        return false;
+      }
+      if (part) {
+        current = current[part];
+      }
+    }
+    return true;
+  }
+
+  function getFileModifiedDate(path) {
+    const parts = path.split('/');
+    let current = fileSystem['/home/user/'];
+    
+    for (const part of parts) {
+      if (part && current[part] === undefined) {
+        return null;
+      }
+      if (part) {
+        current = current[part];
+      }
+    }
+    return current.modified || null;
+  }
+
+  // Initialize on page load
+  window.onload = function() {
+    // No initialization needed for this simulation
+  };
+</script>
+
+</body>
+</html>
