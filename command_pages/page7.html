@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Linux Commands Learning Platform - Pipe Command</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #f0c93d;
+    }
+    h3 {
+      color: #35c7f3;
+    }
+    a {
+      color: #35c7f3;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    nav a {
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    header {
+      margin-bottom: 20px;
+      border-bottom: 2px solid #35c7f3;
+      padding-bottom: 10px;
+    }
+    section.overview {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    section.command-box {
+      background: #222;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .command-section {
+      flex: 1;
+      min-width: 300px;
+    }
+    .file-section {
+      flex: 1;
+      min-width: 300px;
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 6px;
+    }
+    code {
+      background: #333;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #f0c93d;
+    }
+    input[type="text"] {
+      background: #111;
+      border: 1px solid #555;
+      border-radius: 4px;
+      padding: 8px;
+      width: 200px;
+      color: #eee;
+      font-family: monospace;
+      margin-right: 10px;
+    }
+    select {
+      background: #111;
+      border: 1px solid #555;
+      border-radius: 4px;
+      padding: 8px;
+      color: #eee;
+      font-family: monospace;
+      margin-right: 10px;
+      width: 200px;
+    }
+    button {
+      background: #35c7f3;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: #121212;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #27a1d9;
+    }
+    .output {
+      background: #111;
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      min-height: 60px;
+      color: #c5c5c5;
+    }
+    .file-content {
+      background: #111;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      max-height: 300px;
+      overflow-y: auto;
+      color: #c5c5c5;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #333;
+      color: #f0c93d;
+    }
+    tr:nth-child(even) {
+      background-color: #222;
+    }
+    tr:hover {
+      background-color: #333;
+    }
+    .file-title {
+      color: #35c7f3;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .match {
+      background-color: #334433;
+      font-weight: bold;
+    }
+    .pipe-arrow {
+      color: #f0c93d;
+      font-size: 24px;
+      margin: 0 10px;
+    }
+    .command-chain {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="../">Home</a>
+    <a href="../commandlist.html">Command List</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+  <h1>Working With Pipes: <code>|</code></h1>
+</header>
+
+<section class="overview">
+  <h2>Pipe Command</h2>
+  <p>The pipe (<code>|</code>) sends the output of one command as input to another:</p>
+  <table>
+    <tr>
+      <th>Command</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td><code>command1 | command2</code></td>
+      <td>Pipes output from command1 to command2</td>
+    </tr>
+    <tr>
+      <td><code>grep pattern file | sort</code></td>
+      <td>Searches then sorts results</td>
+    </tr>
+    <tr>
+      <td><code>grep pattern file | sort -r</code></td>
+      <td>Searches then reverse sorts results</td>
+    </tr>
+  </table>
+</section>
+
+<section class="command-box" id="pipe-basic">
+  <div class="command-section">
+    <h2><code>grep | sort</code> - Basic Pipe</h2>
+    <ol>
+      <li><strong>What it does:</strong> Searches files then sorts the results</li>
+      <li><strong>When to use:</strong> When you need processed, ordered results</li>
+      <li><strong>Example:</strong> 
+        <pre><code>grep dh file1.txt file2.txt | sort
+apple_dh
+dh_connection
+zdh_error</code></pre>
+      </li>
+    </ol>
+    <div class="command-chain">
+      <div>
+        <input type="text" id="pipePattern" placeholder="Search pattern" />
+        <select id="pipeFile1Select">
+          <option value="network_log.txt">network_log.txt</option>
+          <option value="system_log.txt">system_log.txt</option>
+        </select>
+        <select id="pipeFile2Select">
+          <option value="error_log.txt">error_log.txt</option>
+          <option value="">(none)</option>
+        </select>
+      </div>
+      <span class="pipe-arrow">|</span>
+      <div>
+        <select id="pipeCommandSelect">
+          <option value="sort">sort</option>
+          <option value="sort -r">sort -r</option>
+          <option value="wc -l">wc -l</option>
+        </select>
+      </div>
+    </div>
+    <button onclick="runPipeCommand()">Run command</button>
+    <div class="output" id="pipeOutput">Output will appear here</div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">Files:</div>
+    <div class="file-title">File 1: <span id="pipeFile1Name">network_log.txt</span></div>
+    <div class="file-content" id="pipeFile1Display"></div>
+    <div class="file-title">File 2: <span id="pipeFile2Name">error_log.txt</span></div>
+    <div class="file-content" id="pipeFile2Display"></div>
+  </div>
+</section>
+
+<section class="command-box" id="pipe-examples">
+  <div class="command-section">
+    <h2>Common Pipe Examples</h2>
+    
+    <h3>1. Search and Sort</h3>
+    <div class="command-chain">
+      <code>grep dh log*.txt</code>
+      <span class="pipe-arrow">|</span>
+      <code>sort</code>
+    </div>
+    <button onclick="runExample1()">Run Example</button>
+    <div class="output" id="example1Output"></div>
+    
+    <h3>2. Search and Reverse Sort</h3>
+    <div class="command-chain">
+      <code>grep error *.log</code>
+      <span class="pipe-arrow">|</span>
+      <code>sort -r</code>
+    </div>
+    <button onclick="runExample2()">Run Example</button>
+    <div class="output" id="example2Output"></div>
+    
+    <h3>3. Count Matching Lines</h3>
+    <div class="command-chain">
+      <code>grep -i warning system.log</code>
+      <span class="pipe-arrow">|</span>
+      <code>wc -l</code>
+    </div>
+    <button onclick="runExample3()">Run Example</button>
+    <div class="output" id="example3Output"></div>
+  </div>
+  <div class="file-section">
+    <div class="file-title">Sample Files:</div>
+    <div class="file-title">network_log.txt</div>
+    <div class="file-content">dhcp_request 192.168.1.1
+dhcp_ack 192.168.1.1
+connection_timeout
+dh_connection established
+dns_lookup failed</div>
+    
+    <div class="file-title">error_log.txt</div>
+    <div class="file-content">ERROR: dh_connection failed
+WARNING: high latency
+ERROR: authentication failed
+dh_retry attempt 1
+ERROR: timeout</div>
+    
+    <div class="file-title">system.log</div>
+    <div class="file-content">[INFO] System started
+[WARNING] Disk space low
+[ERROR] Connection failed
+[WARNING] High CPU usage
+[INFO] Backup completed</div>
+  </div>
+</section>
+
+<script>
+  // Sample file contents
+  const files = {
+    'network_log.txt': `dhcp_request 192.168.1.1
+dhcp_ack 192.168.1.1
+connection_timeout
+dh_connection established
+dns_lookup failed`,
+    'error_log.txt': `ERROR: dh_connection failed
+WARNING: high latency
+ERROR: authentication failed
+dh_retry attempt 1
+ERROR: timeout`,
+    'system_log.txt': `[INFO] System startup
+[ERROR] dh_initialization failed
+[WARNING] DHCP slow response
+[INFO] Network initialized`,
+    'system.log': `[INFO] System started
+[WARNING] Disk space low
+[ERROR] Connection failed
+[WARNING] High CPU usage
+[INFO] Backup completed`
+  };
+
+  // Initialize file displays
+  function initializeFileDisplays() {
+    document.getElementById("pipeFile1Display").textContent = files['network_log.txt'];
+    document.getElementById("pipeFile2Display").textContent = files['error_log.txt'];
+  }
+
+  // Run pipe command
+  function runPipeCommand() {
+    const pattern = document.getElementById("pipePattern").value.trim();
+    const file1 = document.getElementById("pipeFile1Select").value;
+    const file2 = document.getElementById("pipeFile2Select").value;
+    const command = document.getElementById("pipeCommandSelect").value;
+    
+    // Update displayed filenames
+    document.getElementById("pipeFile1Name").textContent = file1;
+    document.getElementById("pipeFile2Name").textContent = file2 || "(none)";
+    
+    // Get file contents
+    const content1 = files[file1] || "";
+    const content2 = file2 ? files[file2] || "" : "";
+    const allContent = content1 + '\n' + content2;
+    
+    if (!pattern) {
+      document.getElementById("pipeOutput").textContent = "Please enter a search pattern.";
+      return;
+    }
+    
+    // First command (grep)
+    const grepResults = allContent.split('\n')
+      .filter(line => line.includes(pattern));
+    
+    // Second command (after pipe)
+    let finalResults = [...grepResults];
+    if (command === "sort") {
+      finalResults.sort();
+    } else if (command === "sort -r") {
+      finalResults.sort().reverse();
+    } else if (command === "wc -l") {
+      finalResults = [`${grepResults.length}`];
+    }
+    
+    // Display command and output
+    const fileList = file2 ? `${file1} ${file2}` : file1;
+    document.getElementById("pipeOutput").textContent = 
+      `$ grep '${pattern}' ${fileList} | ${command}\n` +
+      finalResults.join('\n');
+  }
+
+  // Example 1: grep dh | sort
+  function runExample1() {
+    const pattern = "dh";
+    const file1 = "network_log.txt";
+    const file2 = "error_log.txt";
+    const command = "sort";
+    
+    const content1 = files[file1] || "";
+    const content2 = files[file2] || "";
+    const allContent = content1 + '\n' + content2;
+    
+    const grepResults = allContent.split('\n')
+      .filter(line => line.includes(pattern));
+    
+    const finalResults = [...grepResults].sort();
+    
+    document.getElementById("example1Output").textContent = 
+      `$ grep '${pattern}' ${file1} ${file2} | ${command}\n` +
+      finalResults.join('\n');
+  }
+
+  // Example 2: grep error | sort -r
+  function runExample2() {
+    const pattern = "ERROR";
+    const file1 = "error_log.txt";
+    const file2 = "system_log.txt";
+    const command = "sort -r";
+    
+    const content1 = files[file1] || "";
+    const content2 = files[file2] || "";
+    const allContent = content1 + '\n' + content2;
+    
+    const grepResults = allContent.split('\n')
+      .filter(line => line.includes(pattern));
+    
+    const finalResults = [...grepResults].sort().reverse();
+    
+    document.getElementById("example2Output").textContent = 
+      `$ grep '${pattern}' ${file1} ${file2} | ${command}\n` +
+      finalResults.join('\n');
+  }
+
+  // Example 3: grep warning | wc -l
+  function runExample3() {
+    const pattern = "WARNING";
+    const file = "system.log";
+    const command = "wc -l";
+    
+    const content = files[file] || "";
+    
+    const grepResults = content.split('\n')
+      .filter(line => line.includes(pattern));
+    
+    document.getElementById("example3Output").textContent = 
+      `$ grep -i '${pattern}' ${file} | ${command}\n` +
+      grepResults.length;
+  }
+
+  // Initialize on page load
+  window.onload = initializeFileDisplays;
+</script>
+
+</body>
+</html>
